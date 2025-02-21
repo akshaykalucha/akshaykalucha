@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Databricks AI</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: rgb(224, 224, 219); /* Foreground: light greyish-beige */
+      line-height: 1.6;
+      background: rgb(42, 40, 41); /* Background: dark grey */
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgb(42, 40, 41);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo { font-size: 24px; font-weight: bold; color: rgb(224, 224, 219); }
+    .nav-links a {
+      color: rgb(224, 224, 219);
+      text-decoration: none;
+      margin-left: 30px;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: #f28c38; /* Orange accent */ }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: rgb(224, 224, 219); /* Light greyish-beige */
+    }
+    .hero h1 {
+      font-size: 48px;
+      margin: 0 0 20px;
+      color: rgb(42, 40, 41); /* Dark grey for contrast */
+      font-weight: normal;
+    }
+    .hero .sub-tagline {
+      font-size: 20px;
+      color: rgb(42, 40, 41);
+      margin: 0 0 30px;
+    }
+    .hero-btn {
+      background: #f28c38;
+      color: #fff;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .hero-btn:hover { background: #e07b30; }
+
+    /* Expertise Section */
+    .expertise {
+      padding: 60px 20px;
+      text-align: center;
+      background: rgb(42, 40, 41);
+    }
+    .expertise h2 {
+      font-size: 36px;
+      color: rgb(224, 224, 219);
+      margin-bottom: 40px;
+      font-weight: normal;
+    }
+    .expertise-item {
+      max-width: 800px;
+      margin: 0 auto 40px;
+    }
+    .expertise-item h3 {
+      color: #f28c38;
+      font-size: 24px;
+      margin: 0 0 15px;
+      font-weight: normal;
+    }
+    .expertise-item p {
+      font-size: 16px;
+      color: rgb(224, 224, 219);
+      margin: 0;
+      text-align: left;
+    }
+
+    /* ML Apps Section */
+    .ml-apps {
+      padding: 60px 20px;
+      text-align: center;
+      background: rgb(224, 224, 219);
+    }
+    .ml-apps h2 {
+      font-size: 36px;
+      color: rgb(42, 40, 41);
+      margin-bottom: 20px;
+      font-weight: normal;
+    }
+    .ml-apps p {
+      font-size: 16px;
+      color: rgb(42, 40, 41);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Our Approach Section */
+    .our-approach {
+      padding: 60px 20px;
+      text-align: center;
+      background: rgb(42, 40, 41);
+    }
+    .our-approach h2 {
+      font-size: 36px;
+      color: rgb(224, 224, 219);
+      margin-bottom: 20px;
+      font-weight: normal;
+    }
+    .our-approach p {
+      font-size: 16px;
+      color: rgb(224, 224, 219);
+      max-width: 800px;
+      margin: 0 auto 15px;
+    }
+
+    /* Testimonial Section */
+    .testimonials {
+      padding: 60px 20px;
+      background: rgb(224, 224, 219);
+      text-align: center;
+    }
+    .testimonials h2 {
+      font-size: 36px;
+      color: rgb(42, 40, 41);
+      margin-bottom: 40px;
+      font-weight: normal;
+    }
+    .testimonial-scroll {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding-bottom: 15px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .testimonial-scroll::-webkit-scrollbar { height: 6px; }
+    .testimonial-scroll::-webkit-scrollbar-thumb { background: #f28c38; border-radius: 3px; }
+    .testimonial-item {
+      min-width: 250px;
+      padding: 15px;
+      background: rgb(42, 40, 41);
+      border-radius: 5px;
+      color: rgb(224, 224, 219);
+      flex-shrink: 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .testimonial-item p {
+      margin: 0 0 10px;
+      font-style: italic;
+      font-size: 14px;
+    }
+    .testimonial-item span {
+      color: #f28c38;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer {
+      background: rgb(42, 40, 41);
+      color: rgb(224, 224, 219);
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      border-top: 1px solid rgb(224, 224, 219);
+    }
+
+    /* Media Queries for Mobile */
+    @media (max-width: 768px) {
+      nav { padding: 15px 20px; }
+      .logo { font-size: 20px; }
+      .nav-links a { margin-left: 15px; font-size: 14px; }
+      .hero { padding: 60px 15px; }
+      .hero h1 { font-size: 36px; }
+      .hero .sub-tagline { font-size: 18px; }
+      .hero-btn { padding: 10px 20px; font-size: 16px; }
+      .expertise { padding: 40px 15px; }
+      .expertise h2 { font-size: 28px; }
+      .expertise-item h3 { font-size: 20px; }
+      .expertise-item p { font-size: 14px; }
+      .ml-apps { padding: 40px 15px; }
+      .ml-apps h2 { font-size: 28px; }
+      .our-approach { padding: 40px 15px; }
+      .our-approach h2 { font-size: 28px; }
+      .testimonials { padding: 40px 15px; }
+      .testimonials h2 { font-size: 28px; }
+      .testimonial-item { min-width: 200px; padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Databricks AI</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>Pioneering IT for Tomorrow</h1>
+    <div class="sub-tagline">For Engineers By Engineers</div>
+    <button class="hero-btn" id="exploreBtn">Explore Now</button>
+  </div>
+
+  <div class="expertise">
+    <h2>Our Expertise</h2>
+    <div class="expertise-item">
+      <h3>AI-Powered Bookkeeping</h3>
+      <p>Our AI-powered bookkeeping solution transforms financial management for small businesses by eliminating the 120+ hours typically spent on manual bookkeeping annually. Leveraging advanced Machine Learning algorithms and Natural Language Processing, our platform delivers real-time financial processing with sub-second latency, automated transaction categorization with 99.7% accuracy, and intelligent receipt scanning that works seamlessly with your existing accounts. Small businesses using our solution reduce bookkeeping costs by 60% on average, with our customers reporting dramatic reductions in monthly bookkeeping time from 20 hours to just 2 hours. Our technology provides instant financial insights through a user-friendly dashboard, generates tax-ready reports with a single click, and offers ML-powered recommendations to improve cash flow—all secured with bank-level encryption and available through affordable subscription plans starting at just $29/month with a risk-free 30-day trial.</p>
+    </div>
+    <div class="expertise-item">
+      <h3>Software Engineering Support</h3>
+      <p>Today's software engineering landscape constantly expands beyond just programming languages. Our technical team excels at identifying exceptional talent across diverse specializations: front-end development (from modern NodeJS/React/Angular frameworks to established technologies like jQuery, WordPerfect and CSS), back-end systems (Java/Python/Rust), cloud infrastructure (AWS/Azure/GCP), and specialized domains (such as e-commerce search/recommendation engines deployed by major global enterprises). We bring extensive expertise building high-performance, event-driven architectures capable of supporting millions of users while handling 10,000+ transactions per second. At Databricks AI, you'll collaborate with elite engineers whose backgrounds include leadership roles at tech giants like Google, Microsoft, and Amazon.</p>
+    </div>
+    <div class="expertise-item">
+      <h3>AI/ML Models & Bookkeeping Engineering</h3>
+      <p>The world of financial management is rapidly evolving, and achieving optimal results depends on implementing the right technological solutions. Our AI-powered bookkeeping teams deliver precisely the automated financial tools you need—when you need them—to maximize efficiency and productivity across your accounting operations. We bring specialized expertise in automated receipt processing, intelligent transaction categorization, predictive cash flow analysis, and a methodical approach to deploying machine learning models that transform raw financial data into actionable business insights. Our solutions seamlessly integrate with your existing systems to deliver immediate value to your bottom line.</p>
+    </div>
+    <div class="expertise-item">
+      <h3>DevOps & Account Reliability</h3>
+      <p>Whether you manage a digital accounting practice or use financial technology to support your physical business location, protecting your financial data and minimizing compliance risks is essential. Our bookkeeping solutions provide comprehensive financial oversight, reliable record-keeping, accuracy verification, and automated workflows that safeguard your critical accounting functions. Key advantages include Financial Process Optimization, Audit-Readiness as a Service, Tax Compliance Monitoring, Proactive Error Detection, and Continuous Reconciliation. We collaborate with your finance team to implement end-to-end financial automation while fostering a culture of regulatory awareness, accelerating your monthly close process with improved reporting reliability and tax preparation confidence.</p>
+    </div>
+  </div>
+
+  <div class="ml-apps">
+    <h2>Machine Learning Powered Apps</h2>
+    <p>At Databricks AI, we specialize in building iOS and Android applications using Swift and Kotlin, seamlessly integrated with machine learning models. From predictive analytics to real-time AI-driven features, our mobile solutions bring intelligence to your fingertips.</p>
+  </div>
+
+  <div class="our-approach">
+    <h2>Our Approach</h2>
+    <p>At Databricks AI, we're a collective of passionate engineers dedicated to delivering cutting-edge Data and ML solutions through efficient Mobile platforms. We've built high-performing technical teams that serve clients across the US and India.</p>
+    <p>Our approach replaces traditional recruitment with relationship-driven talent acquisition, connecting you with exceptional engineers through our extensive referral networks. We've grown organically to 5,000+ consultants without sales or marketing teams, with specialized engineering hubs in Hyderabad, Bangalore, and Chennai housing over 1,000 software engineers each.</p>
+    <p>Our Contract-to-Hire model allows clients to build meaningful relationships with our engineers before bringing them onboard permanently. This commitment to long-term growth has resulted in average consultant tenures exceeding 3 years and client relationships lasting 2+ years. Whether you're an emerging startup or an established enterprise, our passionate engineering team delivers customized Data and ML solutions through optimized Mobile platforms that help your innovations thrive in today's market.</p>
+  </div>
+
+  <div class="testimonials">
+    <h2>What Our Clients Say</h2>
+    <div class="testimonial-scroll">
+      <div class="testimonial-item">
+        <p>"Databricks AI transformed our mobile strategy with an ML-powered iOS app."</p>
+        <span>- TechCorp CEO</span>
+      </div>
+      <div class="testimonial-item">
+        <p>"Their Kotlin expertise delivered a seamless Android experience."</p>
+        <span>- InnovateNow Founder</span>
+      </div>
+      <div class="testimonial-item">
+        <p>"The team’s cloud and AI integration is unmatched."</p>
+        <span>- DataSync CTO</span>
+      </div>
+      <div class="testimonial-item">
+        <p>"Fast, reliable, and cutting-edge—our app’s a game-changer."</p>
+        <span>- FutureLabs VP</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Databricks AI. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const exploreBtn = document.getElementById('exploreBtn');
+    exploreBtn.addEventListener('mouseover', () => {
+      exploreBtn.style.background = '#e07b30';
+    });
+    exploreBtn.addEventListener('mouseout', () => {
+      exploreBtn.style.background = '#f28c38';
+    });
+    exploreBtn.addEventListener('click', () => {
+      alert('Ready to dive into Databricks AI? Let’s connect!');
+    });
+
+    // Duplicate testimonials for seamless scroll
+    const scrollContainer = document.querySelector('.testimonial-scroll');
+    scrollContainer.innerHTML += scrollContainer.innerHTML;
+  </script>
+</body>
+</html>
