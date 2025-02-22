@@ -140,7 +140,7 @@
       margin: 0 0 30px;
     }
     .graph-container {
-      max-width: 900px;
+      max-width: 700px;
       margin: 0 auto;
       padding: 20px;
       background: transparent;
@@ -152,11 +152,9 @@
       margin-bottom: 20px;
       font-weight: 500;
     }
-    canvas#bookkeepingGraph { 
-      max-height: 500px;
-    }
+    canvas#bookkeepingGraph { max-height: 400px; }
 
-    /* Other Sections */
+    /* Middle Sections */
     .expertise, .ml-apps, .our-approach, .testimonials {
       padding: 60px 40px;
       text-align: center;
@@ -179,7 +177,7 @@
     .ml-apps h2, .testimonials h2 { color: rgb(42, 40, 41); }
     .expertise-item, .ml-apps p, .our-approach p {
       max-width: 700px;
-      margin: 0 auto;
+      margin: 0 auto 20px;
     }
     .expertise-item h3 {
       color: #f28c38;
@@ -191,7 +189,55 @@
       font-size: 16px;
       color: rgb(224, 224, 219);
     }
-    .ml-apps p, .testimonials p { color: rgb(42, 40, 41); }
+    .ml-apps p { color: rgb(42, 40, 41); }
+
+    /* Infographics */
+    .infographic {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      max-width: 700px;
+      margin: 20px auto;
+    }
+    .infographic-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .infographic-icon {
+      width: 40px;
+      height: 40px;
+      background: #f28c38;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 8px;
+      position: relative;
+    }
+    .infographic-icon.bookkeeping { 
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(224,224,219)"><path d="M19 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2zm-1 18H7a1 1 0 01-1-1V5a1 1 0 011-1h11a1 1 0 011 1v14a1 1 0 01-1 1zM8 6h8v2H8V6zm0 4h8v2H8v-2zm0 4h8v2H8v-2z"/></svg>') center / 24px no-repeat, #f28c38;
+      animation: bookFlip 3s infinite ease-in-out;
+    }
+    .infographic-icon.engineering { 
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(224,224,219)"><path d="M12 2a10 10 0 00-7.07 17.07l1.41-1.41A8 8 0 114 12h2l-3 3 3 3H4a8 8 0 0112 0v-2l3 3-3 3v-2a10 10 0 000-20z"/></svg>') center / 24px no-repeat, #f28c38;
+      animation: rotateGear 4s infinite linear;
+    }
+    .infographic-icon.apps { 
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(224,224,219)"><path d="M4 2h16a2 2 0 012 2v16a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2zm2 4v12h12V6H6zm2 2h8v2H8V8zm0 4h8v2H8v-2z"/></svg>') center / 24px no-repeat, #f28c38;
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
+    .infographic-icon.team { 
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(224,224,219)"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>') center / 24px no-repeat, #f28c38;
+      animation: bounceTeam 2s infinite ease-in-out;
+    }
+    .infographic-text {
+      font-size: 12px;
+      color: rgb(224, 224, 219);
+    }
+    .ml-apps .infographic-text { color: rgb(42, 40, 41); }
 
     /* Testimonials Carousel */
     .testimonial-container {
@@ -209,7 +255,7 @@
       min-width: 300px;
       background: white;
       border-radius: 12px;
-      padding: 20px; /* Reduced padding for better fit */
+      padding: 20px;
       color: rgb(42, 40, 41);
       transition: all 0.4s ease;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
@@ -217,14 +263,14 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      min-height: 250px; /* Changed to min-height for flexibility */
+      min-height: 250px;
     }
     .testimonial-card::before {
       content: '"';
       position: absolute;
       top: 10px;
       left: 10px;
-      font-size: 48px; /* Reduced size */
+      font-size: 48px;
       color: rgba(42, 40, 41, 0.05);
       font-family: Georgia, serif;
     }
@@ -319,6 +365,24 @@
       50% { transform: scale(1.2); opacity: 0.7; }
       100% { transform: scale(1); opacity: 1; }
     }
+    @keyframes bookFlip {
+      0% { transform: rotate(0); }
+      50% { transform: rotate(-5deg); }
+      100% { transform: rotate(0); }
+    }
+    @keyframes rotateGear {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(242, 140, 56, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(242, 140, 56, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(242, 140, 56, 0); }
+    }
+    @keyframes bounceTeam {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
 
     /* Media Queries for Mobile */
     @media (max-width: 768px) {
@@ -334,18 +398,23 @@
       .hero { padding: 60px 15px; }
       .hero h1 { font-size: 36px; }
       .hero .sub-tagline { font-size: 18px; }
-      .graph-container { 
-        max-width: 100%; 
-        padding: 15px; 
-      }
-      canvas#bookkeepingGraph { 
-        max-height: 400px;
-      }
+      .graph-container { max-width: 100%; padding: 15px; }
       .graph-container h2 { font-size: 20px; }
       .expertise, .ml-apps, .our-approach, .testimonials { padding: 40px 15px; }
       h2 { font-size: 28px; }
       .expertise-item h3 { font-size: 20px; }
       .expertise-item p, .ml-apps p, .our-approach p { font-size: 14px; }
+      .infographic { 
+        flex-direction: column; 
+        gap: 10px; 
+        margin: 15px auto; 
+      }
+      .infographic-icon { 
+        width: 30px; 
+        height: 30px; 
+        background-size: 18px; 
+      }
+      .infographic-text { font-size: 11px; }
       .testimonial-card { 
         min-width: 250px; 
         padding: 15px; 
@@ -392,16 +461,9 @@
         height: 24px; 
         font-size: 9px;
       }
-      .author-info {
-        max-width: calc(100% - 30px);
-      }
-      .author-name { 
-        font-size: 11px;
-        margin-bottom: 1px;
-      }
-      .author-title { 
-        font-size: 9px;
-      }
+      .author-info { max-width: calc(100% - 30px); }
+      .author-name { font-size: 11px; margin-bottom: 1px; }
+      .author-title { font-size: 9px; }
     }
   </style>
 </head>
@@ -429,8 +491,8 @@
   </nav>
 
   <div class="hero">
-    <h1>Pioneering IT for Tomorrow</h1>
-    <div class="sub-tagline">For Engineers By Engineers</div>
+    <h1>Empower Your Books with AI Precision</h1>
+    <div class="sub-tagline">For Data Keepers By Engineers</div>
     <div class="graph-container">
       <h2>Time Savings & Value in Bookkeeping</h2>
       <canvas id="bookkeepingGraph"></canvas>
@@ -441,30 +503,71 @@
     <h2>Our Expertise</h2>
     <div class="expertise-item">
       <h3>AI-Powered Bookkeeping</h3>
-      <p>Our AI-powered bookkeeping solution transforms financial management for small businesses by eliminating the 120+ hours typically spent on manual bookkeeping annually. Leveraging advanced Machine Learning algorithms and Natural Language Processing, our platform delivers real-time financial processing with sub-second latency, automated transaction categorization with 99.7% accuracy, and intelligent receipt scanning that works seamlessly with your existing accounts. Small businesses using our solution reduce bookkeeping costs by 60% on average, with our customers reporting dramatic reductions in monthly bookkeeping time from 20 hours to just 2 hours. Our technology provides instant financial insights through a user-friendly dashboard, generates tax-ready reports with a single click, and offers ML-powered recommendations to improve cash flow—all secured with bank-level encryption and available through affordable subscription plans starting at just $29/month with a risk-free 30-day trial.</p>
+      <p>Our AI-powered bookkeeping solution transforms financial management for small businesses by eliminating the 120+ hours typically spent on manual bookkeeping annually. Leveraging advanced Machine Learning algorithms and Natural Language Processing, our platform delivers real-time financial processing with sub-second latency.</p>
+      <div class="infographic">
+        <div class="infographic-item">
+          <div class="infographic-icon bookkeeping"></div>
+          <div class="infographic-text">90% Time Saved</div>
+        </div>
+      </div>
+      <p>Small businesses using our solution reduce bookkeeping costs by 60% on average, with our customers reporting dramatic reductions in monthly bookkeeping time from 20 hours to just 2 hours. Our technology provides instant financial insights through a user-friendly dashboard, generates tax-ready reports with a single click, and offers ML-powered recommendations to improve cash flow—all secured with bank-level encryption and available through affordable subscription plans starting at just $29/month with a risk-free 30-day trial.</p>
     </div>
     <div class="expertise-item">
       <h3>Software Engineering Support</h3>
-      <p>Today's software engineering landscape constantly expands beyond just programming languages. Our technical team excels at identifying exceptional talent across diverse specializations: front-end development (from modern NodeJS/React/Angular frameworks to established technologies like jQuery, WordPerfect and CSS), back-end systems (Java/Python/Rust), cloud infrastructure (AWS/Azure/GCP), and specialized domains (such as e-commerce search/recommendation engines deployed by major global enterprises). We bring extensive expertise building high-performance, event-driven architectures capable of supporting millions of users while handling 10,000+ transactions per second. At Databricks AI, you'll collaborate with elite engineers whose backgrounds include leadership roles at tech giants like Google, Microsoft, and Amazon.</p>
+      <p>Today's software engineering landscape constantly expands beyond just programming languages. Our technical team excels at identifying exceptional talent across diverse specializations: front-end development (from modern NodeJS/React/Angular frameworks to established technologies like jQuery, WordPerfect and CSS), back-end systems (Java/Python/Rust), cloud infrastructure (AWS/Azure/GCP), and specialized domains (such as e-commerce search/recommendation engines deployed by major global enterprises).</p>
+      <div class="infographic">
+        <div class="infographic-item">
+          <div class="infographic-icon engineering"></div>
+          <div class="infographic-text">10K+ Tx/sec</div>
+        </div>
+      </div>
+      <p>We bring extensive expertise building high-performance, event-driven architectures capable of supporting millions of users while handling 10,000+ transactions per second. At Databricks AI, you'll collaborate with elite engineers whose backgrounds include leadership roles at tech giants like Google, Microsoft, and Amazon.</p>
     </div>
     <div class="expertise-item">
       <h3>AI/ML Models & Bookkeeping Engineering</h3>
-      <p>The world of financial management is rapidly evolving, and achieving optimal results depends on implementing the right technological solutions. Our AI-powered bookkeeping teams deliver precisely the automated financial tools you need—when you need them—to maximize efficiency and productivity across your accounting operations. We bring specialized expertise in automated receipt processing, intelligent transaction categorization, predictive cash flow analysis, and a methodical approach to deploying machine learning models that transform raw financial data into actionable business insights. Our solutions seamlessly integrate with your existing systems to deliver immediate value to your bottom line.</p>
+      <p>The world of financial management is rapidly evolving, and achieving optimal results depends on implementing the right technological solutions. Our AI-powered bookkeeping teams deliver precisely the automated financial tools you need—when you need them—to maximize efficiency and productivity across your accounting operations.</p>
+      <div class="infographic">
+        <div class="infographic-item">
+          <div class="infographic-icon bookkeeping"></div>
+          <div class="infographic-text">99.7% Accuracy</div>
+        </div>
+      </div>
+      <p>We bring specialized expertise in automated receipt processing, intelligent transaction categorization, predictive cash flow analysis, and a methodical approach to deploying machine learning models that transform raw financial data into actionable business insights. Our solutions seamlessly integrate with your existing systems to deliver immediate value to your bottom line.</p>
     </div>
     <div class="expertise-item">
       <h3>DevOps & Account Reliability</h3>
-      <p>Whether you manage a digital accounting practice or use financial technology to support your physical business location, protecting your financial data and minimizing compliance risks is essential. Our bookkeeping solutions provide comprehensive financial oversight, reliable record-keeping, accuracy verification, and automated workflows that safeguard your critical accounting functions. Key advantages include Financial Process Optimization, Audit-Readiness as a Service, Tax Compliance Monitoring, Proactive Error Detection, and Continuous Reconciliation. We collaborate with your finance team to implement end-to-end financial automation while fostering a culture of regulatory awareness, accelerating your monthly close process with improved reporting reliability and tax preparation confidence.</p>
+      <p>Whether you manage a digital accounting practice or use financial technology to support your physical business location, protecting your financial data and minimizing compliance risks is essential. Our bookkeeping solutions provide comprehensive financial oversight, reliable record-keeping, accuracy verification, and automated workflows that safeguard your critical accounting functions.</p>
+      <div class="infographic">
+        <div class="infographic-item">
+          <div class="infographic-icon engineering"></div>
+          <div class="infographic-text">Automation</div>
+        </div>
+      </div>
+      <p>Key advantages include Financial Process Optimization, Audit-Readiness as a Service, Tax Compliance Monitoring, Proactive Error Detection, and Continuous Reconciliation. We collaborate with your finance team to implement end-to-end financial automation while fostering a culture of regulatory awareness, accelerating your monthly close process with improved reporting reliability and tax preparation confidence.</p>
     </div>
   </div>
 
   <div class="ml-apps">
     <h2>Machine Learning Powered Apps</h2>
-    <p>At Databricks AI, we specialize in building iOS and Android applications using Swift and Kotlin, seamlessly integrated with machine learning models. From predictive analytics to real-time AI-driven features, our mobile solutions bring intelligence to your fingertips.</p>
+    <p>At Databricks AI, we specialize in building iOS and Android applications using Swift and Kotlin, seamlessly integrated with machine learning models.</p>
+    <div class="infographic">
+      <div class="infographic-item">
+        <div class="infographic-icon apps"></div>
+        <div class="infographic-text">iOS & Android</div>
+      </div>
+    </div>
+    <p>From predictive analytics to real-time AI-driven features, our mobile solutions bring intelligence to your fingertips.</p>
   </div>
 
   <div class="our-approach">
     <h2>Our Approach</h2>
     <p>At Databricks AI, we're a collective of passionate engineers dedicated to delivering cutting-edge Data and ML solutions through efficient Mobile platforms. We've built high-performing technical teams that serve clients across the US and India.</p>
+    <div class="infographic">
+      <div class="infographic-item">
+        <div class="infographic-icon team"></div>
+        <div class="infographic-text">5,000+ Team</div>
+      </div>
+    </div>
     <p>Our approach replaces traditional recruitment with relationship-driven talent acquisition, connecting you with exceptional engineers through our extensive referral networks. We've grown organically to 5,000+ consultants without sales or marketing teams, with specialized engineering hubs in Hyderabad, Bangalore, and Chennai housing over 1,000 software engineers each.</p>
     <p>Our Contract-to-Hire model allows clients to build meaningful relationships with our engineers before bringing them onboard permanently. This commitment to long-term growth has resulted in average consultant tenures exceeding 3 years and client relationships lasting 2+ years. Whether you're an emerging startup or an established enterprise, our passionate engineering team delivers customized Data and ML solutions through optimized Mobile platforms that help your innovations thrive in today's market.</p>
   </div>
