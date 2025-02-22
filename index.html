@@ -31,12 +31,10 @@
       z-index: 10;
       transition: all 0.3s ease;
     }
-
     nav.scrolled {
       background: rgb(42, 40, 41);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-
     .logo-container {
       display: flex;
       align-items: center;
@@ -61,8 +59,8 @@
       left: 8px;
       top: 3px;
       border-radius: 2px 0 0 2px;
-      box-shadow: inset -2px 0 0 rgba(242, 140, 56, 0.8), /* Thicker orange spine */
-                inset -4px 0 0 rgba(255, 255, 255, 0.2); /* Page edge */
+      box-shadow: inset -2px 0 0 rgba(242, 140, 56, 0.8),
+                  inset -4px 0 0 rgba(255, 255, 255, 0.2);
       transition: transform 0.3s ease;
     }
     .logo-page-left {
@@ -103,9 +101,7 @@
       border-radius: 50%;
       transition: all 0.3s ease;
     }
-    .logo:hover .logo-book {
-      transform: rotate(-5deg);
-    }
+    .logo:hover .logo-book { transform: rotate(-5deg); }
     .logo:hover .logo-ai-dot:nth-child(4) { transform: translate(8px, -8px); }
     .logo:hover .logo-ai-dot:nth-child(5) { transform: translate(-8px, 8px); }
     .logo:hover .logo-ai-dot:nth-child(6) { transform: translate(8px, 8px); }
@@ -116,7 +112,6 @@
       transition: color 0.3s;
     }
     .logo-container:hover .logo-text { color: #f28c38; }
-
     .nav-links a {
       color: rgb(224, 224, 219);
       text-decoration: none;
@@ -157,9 +152,7 @@
       margin-bottom: 20px;
       font-weight: 500;
     }
-    canvas#bookkeepingGraph {
-      max-height: 400px;
-    }
+    canvas#bookkeepingGraph { max-height: 400px; }
 
     /* Other Sections */
     .expertise, .ml-apps, .our-approach, .testimonials {
@@ -169,16 +162,19 @@
       animation: fadeIn 1s ease-in-out;
     }
     .ml-apps { background: rgb(224, 224, 219); }
-    .testimonials { background: rgb(224, 224, 219); padding: 80px 40px; position: relative; overflow: hidden; }
+    .testimonials { 
+      background: rgb(224, 224, 219); 
+      padding: 80px 40px; 
+      position: relative; 
+      overflow: hidden; 
+    }
     h2 {
       font-size: 36px;
       color: rgb(224, 224, 219);
       margin-bottom: 40px;
       font-weight: 500;
     }
-    .ml-apps h2, .testimonials h2 {
-      color: rgb(42, 40, 41);
-    }
+    .ml-apps h2, .testimonials h2 { color: rgb(42, 40, 41); }
     .expertise-item, .ml-apps p, .our-approach p {
       max-width: 700px;
       margin: 0 auto;
@@ -193,9 +189,7 @@
       font-size: 16px;
       color: rgb(224, 224, 219);
     }
-    .ml-apps p, .testimonials p {
-      color: rgb(42, 40, 41);
-    }
+    .ml-apps p, .testimonials p { color: rgb(42, 40, 41); }
 
     /* Testimonials Carousel */
     .testimonial-container {
@@ -207,13 +201,13 @@
       display: flex;
       gap: 30px;
       padding: 20px 0;
-      transition: transform 0.5s ease;
+      will-change: transform;
     }
     .testimonial-card {
       min-width: 300px;
       background: white;
       border-radius: 12px;
-      padding: 40px;
+      padding: 20px; /* Reduced padding for better fit */
       color: rgb(42, 40, 41);
       transition: all 0.4s ease;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
@@ -221,14 +215,14 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      height: 250px;
+      min-height: 250px; /* Changed to min-height for flexibility */
     }
     .testimonial-card::before {
       content: '"';
       position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 60px;
+      top: 10px;
+      left: 10px;
+      font-size: 48px; /* Reduced size */
       color: rgba(42, 40, 41, 0.05);
       font-family: Georgia, serif;
     }
@@ -238,44 +232,54 @@
     }
     .testimonial-content {
       font-size: 16px;
-      line-height: 1.8;
+      line-height: 1.6; /* Reduced line height */
       position: relative;
       z-index: 1;
       color: rgba(42, 40, 41, 0.8);
       flex: 1;
+      margin-bottom: 15px; /* Reduced margin */
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .testimonial-author {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 10px; /* Reduced gap */
       border-top: 1px solid rgba(42, 40, 41, 0.1);
-      padding-top: 20px;
-      margin-top: auto;
+      padding-top: 15px; /* Reduced padding */
     }
     .author-avatar {
-      width: 40px;
-      height: 40px;
+      width: 32px; /* Reduced size */
+      height: 32px;
       border-radius: 50%;
       background: rgb(42, 40, 41);
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 12px; /* Reduced font size */
       font-weight: 500;
+      flex-shrink: 0;
     }
     .author-info {
       flex-grow: 1;
+      overflow: hidden;
     }
     .author-name {
       font-weight: 500;
-      font-size: 16px;
-      margin-bottom: 4px;
+      font-size: 14px; /* Reduced font size */
+      margin-bottom: 2px; /* Reduced margin */
       color: rgb(42, 40, 41);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .author-title {
-      font-size: 14px;
+      font-size: 12px; /* Reduced font size */
       color: rgba(42, 40, 41, 0.6);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* Footer */
@@ -301,10 +305,6 @@
     @keyframes slideUp {
       from { transform: translateY(50px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes slideIn {
-      from { transform: translateX(-50px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
     }
     @keyframes pulse {
       0% { transform: scale(1); opacity: 1; }
@@ -332,10 +332,44 @@
       h2 { font-size: 28px; }
       .expertise-item h3 { font-size: 20px; }
       .expertise-item p, .ml-apps p, .our-approach p { font-size: 14px; }
-      .testimonial-card { min-width: 250px; padding: 30px; height: 200px; }
+      .testimonial-card { 
+        min-width: 250px; 
+        padding: 15px; 
+        min-height: 200px; /* Adjusted for mobile */
+      }
+      .testimonial-card::before { 
+        font-size: 36px; /* Reduced size for mobile */
+        top: 8px;
+        left: 8px;
+      }
+      .testimonial-content { 
+        font-size: 14px; /* Reduced font size */
+        line-height: 1.5; 
+        margin-bottom: 10px; 
+      }
+      .testimonial-author { 
+        padding-top: 10px; 
+        gap: 8px; 
+      }
+      .author-avatar { 
+        width: 28px; 
+        height: 28px; 
+        font-size: 10px; 
+      }
+      .author-name { font-size: 12px; margin-bottom: 1px; }
+      .author-title { font-size: 10px; }
     }
     @media (max-width: 480px) {
-      .testimonial-card { min-width: 200px; padding: 20px; height: 180px; }
+      .testimonial-card { 
+        min-width: 220px; 
+        padding: 10px; 
+        min-height: 180px; /* Further adjusted */
+      }
+      .testimonial-content { font-size: 13px; }
+      .testimonial-author { padding-top: 8px; gap: 6px; }
+      .author-avatar { width: 24px; height: 24px; font-size: 9px; }
+      .author-name { font-size: 11px; }
+      .author-title { font-size: 9px; }
     }
   </style>
 </head>
@@ -406,7 +440,7 @@
   <div class="testimonials">
     <h2>What Our Clients Say</h2>
     <div class="testimonial-container">
-      <div class="testimonial-track" id="testimonialTrack" style="display: flex; transition: transform 0.5s ease;">
+      <div class="testimonial-track" id="testimonialTrack">
         <div class="testimonial-card">
           <div class="testimonial-content">
             "Databricks AI transformed our entire financial workflow. The AI-powered bookkeeping solution has saved us countless hours and improved our accuracy dramatically."
@@ -464,197 +498,8 @@
       }
       window.addEventListener('scroll', handleScroll);
       handleScroll();
-    });
 
-    // Graph Setup
-    const ctx = document.getElementById('bookkeepingGraph').getContext('2d');
-    const gradientTime = ctx.createLinearGradient(0, 0, 0, 400);
-    gradientTime.addColorStop(0, 'rgba(242, 140, 56, 0.5)');
-    gradientTime.addColorStop(1, 'rgba(242, 140, 56, 0.0)');
-
-    const gradientValue = ctx.createLinearGradient(0, 0, 0, 400);
-    gradientValue.addColorStop(0, 'rgba(66, 165, 245, 0.5)');
-    gradientValue.addColorStop(1, 'rgba(66, 165, 245, 0.0)');
-
-    const bookkeepingGraph = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Manual (20h)', 'Initial Setup', '1 Month', '3 Months', '6 Months', '1 Year'],
-        datasets: [{
-          label: 'Time Saved (Hours)',
-          data: [20, 18, 10, 5, 3, 2],
-          borderColor: '#f28c38',
-          backgroundColor: gradientTime,
-          fill: true,
-          tension: 0.4,
-          pointBackgroundColor: '#f28c38',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: '#f28c38',
-          pointRadius: 6,
-          pointHoverRadius: 8,
-          borderWidth: 3
-        }, {
-          label: 'Value Added ($)',
-          data: [0, 100, 300, 600, 900, 1200],
-          borderColor: '#42a5f5',
-          backgroundColor: gradientValue,
-          fill: true,
-          tension: 0.4,
-          pointBackgroundColor: '#42a5f5',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: '#42a5f5',
-          pointRadius: 6,
-          pointHoverRadius: 8,
-          borderWidth: 3
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: true,
-            position: 'top',
-            labels: {
-              font: { size: 14, family: 'Roboto', weight: '500' },
-              usePointStyle: true,
-              pointStyle: 'circle'
-            }
-          },
-          tooltip: {
-            enabled: true,
-            mode: 'nearest',
-            intersect: false,
-            callbacks: {
-              label: function(context) {
-                let label = context.dataset.label || '';
-                if (label) label += ': ';
-                if (context.parsed.y !== null) {
-                  label += context.dataset.label.includes('Time') ? `${context.parsed.y} hours` : `$${context.parsed.y}`;
-                }
-                return label;
-              }
-            },
-            external: function(context) {
-              const tooltipModel = context.tooltip;
-              if (tooltipModel.opacity === 0) return;
-              if ('ontouchstart' in window) tooltipModel.yAlign = 'bottom';
-            }
-          }
-        },
-        scales: {
-          x: {
-            title: { display: true, text: 'Time', color: 'rgb(42, 40, 41)', font: { size: 16, weight: '500' } },
-            grid: { display: false }
-          },
-          y: {
-            title: { display: true, text: 'Value', color: 'rgb(42, 40, 41)', font: { size: 16, weight: '500' } },
-            grid: { color: 'rgba(42, 40, 41, 0.1)' }
-          }
-        },
-        interaction: {
-          intersect: true,
-          mode: 'nearest',
-          axis: 'xy'
-        },
-        hover: {
-          mode: 'nearest',
-          intersect: true,
-          animationDuration: 400
-        },
-        events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove', 'touchend']
-      }
-    });
-
-    // Draggable Points
-    const canvas = document.getElementById('bookkeepingGraph');
-    let isDragging = false;
-    let selectedPoint = null;
-
-    canvas.addEventListener('mousedown', (e) => {
-      const points = bookkeepingGraph.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
-      if (points.length) {
-        isDragging = true;
-        selectedPoint = points[0];
-        canvas.style.cursor = 'grabbing';
-      }
-    });
-
-    canvas.addEventListener('mousemove', (e) => {
-      if (isDragging && selectedPoint) {
-        const rect = canvas.getBoundingClientRect();
-        const y = e.clientY - rect.top;
-        const scales = bookkeepingGraph.scales;
-        const newValue = scales.y.getValueForPixel(y);
-        
-        const datasetIndex = selectedPoint.datasetIndex;
-        const pointIndex = selectedPoint.index;
-        
-        if (datasetIndex === 0) {
-          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = Math.min(Math.max(Math.round(newValue), 0), 20);
-        } else {
-          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = Math.min(Math.max(Math.round(newValue), 0), 1500);
-        }
-        
-        bookkeepingGraph.update('none');
-      }
-      const points = bookkeepingGraph.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
-      canvas.style.cursor = points.length ? 'grab' : 'default';
-    });
-
-    canvas.addEventListener('mouseup', () => {
-      isDragging = false;
-      selectedPoint = null;
-      canvas.style.cursor = 'default';
-    });
-
-    canvas.addEventListener('mouseleave', () => {
-      isDragging = false;
-      selectedPoint = null;
-      canvas.style.cursor = 'default';
-    });
-
-    canvas.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      const touch = e.touches[0];
-      const points = bookkeepingGraph.getElementsAtEventForMode(touch, 'nearest', { intersect: true }, false);
-      if (points.length) {
-        isDragging = true;
-        selectedPoint = points[0];
-      }
-    });
-
-    canvas.addEventListener('touchmove', (e) => {
-      e.preventDefault();
-      if (isDragging && selectedPoint) {
-        const touch = e.touches[0];
-        const rect = canvas.getBoundingClientRect();
-        const y = touch.clientY - rect.top;
-        const scales = bookkeepingGraph.scales;
-        const newValue = scales.y.getValueForPixel(y);
-        
-        const datasetIndex = selectedPoint.datasetIndex;
-        const pointIndex = selectedPoint.index;
-        
-        if (datasetIndex === 0) {
-          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = Math.min(Math.max(Math.round(newValue), 0), 20);
-        } else {
-          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = Math.min(Math.max(Math.round(newValue), 0), 1500);
-        }
-        
-        bookkeepingGraph.update('none');
-      }
-    });
-
-    canvas.addEventListener('touchend', () => {
-      isDragging = false;
-      selectedPoint = null;
-    });
-
-    // Testimonials Infinite Scroll
-    document.addEventListener('DOMContentLoaded', () => {
+      // Testimonials Infinite Scroll
       const track = document.getElementById('testimonialTrack');
       const cards = track.getElementsByClassName('testimonial-card');
       let currentTranslate = 0;
@@ -682,9 +527,195 @@
       track.addEventListener('mouseenter', () => {
         track.style.animationPlayState = 'paused';
       });
-
       track.addEventListener('mouseleave', () => {
         track.style.animationPlayState = 'running';
+      });
+
+      // Graph Setup
+      const ctx = document.getElementById('bookkeepingGraph').getContext('2d');
+      const gradientTime = ctx.createLinearGradient(0, 0, 0, 400);
+      gradientTime.addColorStop(0, 'rgba(242, 140, 56, 0.5)');
+      gradientTime.addColorStop(1, 'rgba(242, 140, 56, 0.0)');
+
+      const gradientValue = ctx.createLinearGradient(0, 0, 0, 400);
+      gradientValue.addColorStop(0, 'rgba(66, 165, 245, 0.5)');
+      gradientValue.addColorStop(1, 'rgba(66, 165, 245, 0.0)');
+
+      const bookkeepingGraph = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Manual (20h)', 'Initial Setup', '1 Month', '3 Months', '6 Months', '1 Year'],
+          datasets: [{
+            label: 'Time Saved (Hours)',
+            data: [20, 18, 10, 5, 3, 2],
+            borderColor: '#f28c38',
+            backgroundColor: gradientTime,
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#f28c38',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: '#f28c38',
+            pointRadius: 6,
+            pointHoverRadius: 8,
+            borderWidth: 3
+          }, {
+            label: 'Value Added ($)',
+            data: [0, 100, 300, 600, 900, 1200],
+            borderColor: '#42a5f5',
+            backgroundColor: gradientValue,
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#42a5f5',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: '#42a5f5',
+            pointRadius: 6,
+            pointHoverRadius: 8,
+            borderWidth: 3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              labels: {
+                font: { size: 14, family: 'Roboto', weight: '500' },
+                usePointStyle: true,
+                pointStyle: 'circle'
+              }
+            },
+            tooltip: {
+              enabled: true,
+              mode: 'nearest',
+              intersect: false,
+              callbacks: {
+                label: function(context) {
+                  let label = context.dataset.label || '';
+                  if (label) label += ': ';
+                  if (context.parsed.y !== null) {
+                    label += context.dataset.label.includes('Time') ? `${context.parsed.y} hours` : `$${context.parsed.y}`;
+                  }
+                  return label;
+                }
+              },
+              external: function(context) {
+                const tooltipModel = context.tooltip;
+                if (tooltipModel.opacity === 0) return;
+                if ('ontouchstart' in window) tooltipModel.yAlign = 'bottom';
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: { display: true, text: 'Time', color: 'rgb(42, 40, 41)', font: { size: 16, weight: '500' } },
+              grid: { display: false }
+            },
+            y: {
+              title: { display: true, text: 'Value', color: 'rgb(42, 40, 41)', font: { size: 16, weight: '500' } },
+              grid: { color: 'rgba(42, 40, 41, 0.1)' }
+            }
+          },
+          interaction: {
+            intersect: true,
+            mode: 'nearest',
+            axis: 'xy'
+          },
+          hover: {
+            mode: 'nearest',
+            intersect: true,
+            animationDuration: 400
+          },
+          events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove', 'touchend']
+        }
+      });
+
+      // Draggable Points
+      const canvas = document.getElementById('bookkeepingGraph');
+      let isDragging = false;
+      let selectedPoint = null;
+
+      canvas.addEventListener('mousedown', (e) => {
+        const points = bookkeepingGraph.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
+        if (points.length) {
+          isDragging = true;
+          selectedPoint = points[0];
+          canvas.style.cursor = 'grabbing';
+        }
+      });
+
+      canvas.addEventListener('mousemove', (e) => {
+        if (isDragging && selectedPoint) {
+          const rect = canvas.getBoundingClientRect();
+          const y = e.clientY - rect.top;
+          const scales = bookkeepingGraph.scales;
+          const newValue = scales.y.getValueForPixel(y);
+          
+          const datasetIndex = selectedPoint.datasetIndex;
+          const pointIndex = selectedPoint.index;
+          
+          if (datasetIndex === 0) {
+            bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = Math.min(Math.max(Math.round(newValue), 0), 20);
+          } else {
+            bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = Math.min(Math.max(Math.round(newValue), 0), 1500);
+          }
+          
+          bookkeepingGraph.update('none');
+        }
+        const points = bookkeepingGraph.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
+        canvas.style.cursor = points.length ? 'grab' : 'default';
+      });
+
+      canvas.addEventListener('mouseup', () => {
+        isDragging = false;
+        selectedPoint = null;
+        canvas.style.cursor = 'default';
+      });
+
+      canvas.addEventListener('mouseleave', () => {
+        isDragging = false;
+        selectedPoint = null;
+        canvas.style.cursor = 'default';
+      });
+
+      canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const points = bookkeepingGraph.getElementsAtEventForMode(touch, 'nearest', { intersect: true }, false);
+        if (points.length) {
+          isDragging = true;
+          selectedPoint = points[0];
+        }
+      });
+
+      canvas.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        if (isDragging && selectedPoint) {
+          const touch = e.touches[0];
+          const rect = canvas.getBoundingClientRect();
+          const y = touch.clientY - rect.top;
+          const scales = bookkeepingGraph.scales;
+          const newValue = scales.y.getValueForPixel(y);
+          
+          const datasetIndex = selectedPoint.datasetIndex;
+          const pointIndex = selectedPoint.index;
+          
+          if (datasetIndex === 0) {
+            bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = Math.min(Math.max(Math.round(newValue), 0), 20);
+          } else {
+            bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = Math.min(Math.max(Math.round(newValue), 0), 1500);
+          }
+          
+          bookkeepingGraph.update('none');
+        }
+      });
+
+      canvas.addEventListener('touchend', () => {
+        isDragging = false;
+        selectedPoint = null;
       });
     });
   </script>
