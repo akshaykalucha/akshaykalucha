@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us - Databricks AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <style>
     /* General Styles */
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
       color: rgb(224, 224, 219);
@@ -21,20 +22,96 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 40px;
-      background: rgb(42, 40, 41);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      background: transparent;
+      box-shadow: none;
       position: sticky;
       top: 0;
       z-index: 10;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      background: rgb(42, 40, 41);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo {
+      position: relative;
+      width: 40px;
+      height: 40px;
     }
     .logo a {
-      font-size: 24px;
-      font-weight: bold;
-      color: rgb(224, 224, 219);
+      display: block;
+      width: 100%;
+      height: 100%;
       text-decoration: none;
+    }
+    .logo-book {
+      position: absolute;
+      width: 24px;
+      height: 34px;
+      background: rgb(224, 224, 219);
+      left: 8px;
+      top: 3px;
+      border-radius: 2px 0 0 2px;
+      box-shadow: inset -2px 0 0 rgba(242, 140, 56, 0.8),
+                inset -4px 0 0 rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease;
+    }
+    .logo-page-left {
+      position: absolute;
+      width: 10px;
+      height: 28px;
+      background: rgba(42, 40, 41, 0.8);
+      left: 10px;
+      top: 6px;
+      border-radius: 1px;
+      transform: skewY(-5deg);
+    }
+    .logo-page-right {
+      position: absolute;
+      width: 10px;
+      height: 28px;
+      background: rgba(42, 40, 41, 0.6);
+      left: 20px;
+      top: 6px;
+      border-radius: 1px;
+      transform: skewY(5deg);
+    }
+    .logo-ai {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      left: 0;
+      top: 0;
+      border: 2px solid #f28c38;
+      border-radius: 50%;
+      animation: pulse 2s infinite ease-in-out;
+    }
+    .logo-ai-dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #f28c38;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    .logo:hover .logo-book {
+      transform: rotate(-5deg);
+    }
+    .logo:hover .logo-ai-dot:nth-child(4) { transform: translate(8px, -8px); }
+    .logo:hover .logo-ai-dot:nth-child(5) { transform: translate(-8px, 8px); }
+    .logo:hover .logo-ai-dot:nth-child(6) { transform: translate(8px, 8px); }
+    .logo-text {
+      font-size: 24px;
+      font-weight: 500;
+      color: rgb(224, 224, 219);
       transition: color 0.3s;
     }
-    .logo a:hover { color: #f28c38; }
+    .logo-container:hover .logo-text { color: #f28c38; }
     .nav-links a {
       color: rgb(224, 224, 219);
       text-decoration: none;
@@ -49,13 +126,13 @@
       padding: 60px 20px;
       text-align: center;
       background: rgb(224, 224, 219);
-      min-height: calc(100vh - 140px); /* Full height minus nav and footer */
+      min-height: calc(100vh - 140px);
     }
     .content h1 {
       font-size: 36px;
       color: rgb(42, 40, 41);
       margin-bottom: 20px;
-      font-weight: normal;
+      font-weight: 500;
     }
     .content p {
       font-size: 16px;
@@ -74,10 +151,23 @@
       border-top: 1px solid rgb(224, 224, 219);
     }
 
+    /* Animations */
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
     /* Media Queries for Mobile */
     @media (max-width: 768px) {
       nav { padding: 15px 20px; }
-      .logo a { font-size: 20px; }
+      .logo { width: 30px; height: 30px; }
+      .logo-book { width: 18px; height: 26px; left: 6px; top: 2px; }
+      .logo-page-left { width: 8px; height: 22px; left: 7px; top: 4px; }
+      .logo-page-right { width: 8px; height: 22px; left: 15px; top: 4px; }
+      .logo-ai { width: 10px; height: 10px; }
+      .logo-ai-dot { width: 3px; height: 3px; }
+      .logo-text { font-size: 18px; }
       .nav-links a { margin-left: 15px; font-size: 14px; }
       .content { padding: 40px 15px; }
       .content h1 { font-size: 28px; }
@@ -87,7 +177,21 @@
 </head>
 <body>
   <nav>
-    <div class="logo"><a href="index.html">Databricks AI</a></div>
+    <div class="logo-container">
+      <div class="logo">
+        <a href="index.html">
+          <div class="logo-book"></div>
+          <div class="logo-page-left"></div>
+          <div class="logo-page-right"></div>
+          <div class="logo-ai"></div>
+          <div class="logo-ai-dot" style="top: 4px; left: 4px;"></div>
+          <div class="logo-ai-dot" style="top: 4px; right: 4px;"></div>
+          <div class="logo-ai-dot" style="bottom: 4px; left: 4px;"></div>
+          <div class="logo-ai-dot" style="bottom: 4px; right: 4px;"></div>
+        </a>
+      </div>
+      <div class="logo-text">Databricks AI</div>
+    </div>
     <div class="nav-links">
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact Us</a>
@@ -104,5 +208,20 @@
   <footer>
     <p>© 2025 Databricks AI. All rights reserved.</p>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const nav = document.querySelector('nav');
+      function handleScroll() {
+        if (window.scrollY > 50) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+      window.addEventListener('scroll', handleScroll);
+      handleScroll();
+    });
+  </script>
 </body>
 </html>

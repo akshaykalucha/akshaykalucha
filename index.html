@@ -37,14 +37,86 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo {
+      position: relative;
+      width: 40px;
+      height: 40px;
+    }
     .logo a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+    }
+    .logo-book {
+      position: absolute;
+      width: 24px;
+      height: 34px;
+      background: rgb(224, 224, 219);
+      left: 8px;
+      top: 3px;
+      border-radius: 2px 0 0 2px;
+      box-shadow: inset -2px 0 0 rgba(242, 140, 56, 0.8), /* Thicker orange spine */
+                inset -4px 0 0 rgba(255, 255, 255, 0.2); /* Page edge */
+      transition: transform 0.3s ease;
+    }
+    .logo-page-left {
+      position: absolute;
+      width: 10px;
+      height: 28px;
+      background: rgba(42, 40, 41, 0.8);
+      left: 10px;
+      top: 6px;
+      border-radius: 1px;
+      transform: skewY(-5deg);
+    }
+    .logo-page-right {
+      position: absolute;
+      width: 10px;
+      height: 28px;
+      background: rgba(42, 40, 41, 0.6);
+      left: 20px;
+      top: 6px;
+      border-radius: 1px;
+      transform: skewY(5deg);
+    }
+    .logo-ai {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      left: 0;
+      top: 0;
+      border: 2px solid #f28c38;
+      border-radius: 50%;
+      animation: pulse 2s infinite ease-in-out;
+    }
+    .logo-ai-dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #f28c38;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    .logo:hover .logo-book {
+      transform: rotate(-5deg);
+    }
+    .logo:hover .logo-ai-dot:nth-child(4) { transform: translate(8px, -8px); }
+    .logo:hover .logo-ai-dot:nth-child(5) { transform: translate(-8px, 8px); }
+    .logo:hover .logo-ai-dot:nth-child(6) { transform: translate(8px, 8px); }
+    .logo-text {
       font-size: 24px;
       font-weight: 500;
       color: rgb(224, 224, 219);
-      text-decoration: none;
       transition: color 0.3s;
     }
-    .logo a:hover { color: #f28c38; }
+    .logo-container:hover .logo-text { color: #f28c38; }
+
     .nav-links a {
       color: rgb(224, 224, 219);
       text-decoration: none;
@@ -76,7 +148,7 @@
       max-width: 700px;
       margin: 0 auto;
       padding: 20px;
-      background: transparent; /* Minimalistic */
+      background: transparent;
       animation: slideUp 1s ease-out 0.5s backwards;
     }
     .graph-container h2 {
@@ -97,7 +169,7 @@
       animation: fadeIn 1s ease-in-out;
     }
     .ml-apps { background: rgb(224, 224, 219); }
-    .testimonials { background: rgb(224, 224, 219); }
+    .testimonials { background: rgb(224, 224, 219); padding: 80px 40px; position: relative; overflow: hidden; }
     h2 {
       font-size: 36px;
       color: rgb(224, 224, 219);
@@ -124,36 +196,86 @@
     .ml-apps p, .testimonials p {
       color: rgb(42, 40, 41);
     }
-    .testimonial-scroll {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      padding-bottom: 15px;
-      max-width: 800px;
+
+    /* Testimonials Carousel */
+    .testimonial-container {
+      max-width: 1200px;
       margin: 0 auto;
+      position: relative;
     }
-    .testimonial-scroll::-webkit-scrollbar { height: 6px; }
-    .testimonial-scroll::-webkit-scrollbar-thumb { background: #f28c38; border-radius: 3px; }
-    .testimonial-item {
-      min-width: 250px;
-      padding: 15px;
+    .testimonial-track {
+      display: flex;
+      gap: 30px;
+      padding: 20px 0;
+      transition: transform 0.5s ease;
+    }
+    .testimonial-card {
+      min-width: 300px;
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      color: rgb(42, 40, 41);
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 250px;
+    }
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 60px;
+      color: rgba(42, 40, 41, 0.05);
+      font-family: Georgia, serif;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+    .testimonial-content {
+      font-size: 16px;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+      color: rgba(42, 40, 41, 0.8);
+      flex: 1;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-top: 1px solid rgba(42, 40, 41, 0.1);
+      padding-top: 20px;
+      margin-top: auto;
+    }
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
       background: rgb(42, 40, 41);
-      border-radius: 5px;
-      color: rgb(224, 224, 219);
-      flex-shrink: 0;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      animation: slideIn 1s ease-out;
-    }
-    .testimonial-item p {
-      margin: 0 0 10px;
-      font-style: italic;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 14px;
-    }
-    .testimonial-item span {
-      color: #f28c38;
       font-weight: 500;
+    }
+    .author-info {
+      flex-grow: 1;
+    }
+    .author-name {
+      font-weight: 500;
+      font-size: 16px;
+      margin-bottom: 4px;
+      color: rgb(42, 40, 41);
+    }
+    .author-title {
       font-size: 14px;
+      color: rgba(42, 40, 41, 0.6);
     }
 
     /* Footer */
@@ -184,11 +306,22 @@
       from { transform: translateX(-50px); opacity: 0; }
       to { transform: translateX(0); opacity: 1; }
     }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
 
     /* Media Queries for Mobile */
     @media (max-width: 768px) {
       nav { padding: 15px 20px; }
-      .logo a { font-size: 20px; }
+      .logo { width: 30px; height: 30px; }
+      .logo-book { width: 18px; height: 26px; left: 6px; top: 2px; }
+      .logo-page-left { width: 8px; height: 22px; left: 7px; top: 4px; }
+      .logo-page-right { width: 8px; height: 22px; left: 15px; top: 4px; }
+      .logo-ai { width: 10px; height: 10px; }
+      .logo-ai-dot { width: 3px; height: 3px; }
+      .logo-text { font-size: 18px; }
       .nav-links a { margin-left: 15px; font-size: 14px; }
       .hero { padding: 60px 15px; }
       .hero h1 { font-size: 36px; }
@@ -199,133 +332,30 @@
       h2 { font-size: 28px; }
       .expertise-item h3 { font-size: 20px; }
       .expertise-item p, .ml-apps p, .our-approach p { font-size: 14px; }
-      .testimonial-item { min-width: 200px; padding: 10px; }
+      .testimonial-card { min-width: 250px; padding: 30px; height: 200px; }
     }
-
-    /* Replace the existing testimonials styles */
-    .testimonials {
-      background: rgb(224, 224, 219);
-      padding: 80px 40px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .testimonial-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .testimonial-track {
-      display: flex;
-      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-      gap: 30px;
-      padding: 20px 0;
-    }
-
-    .testimonial-card {
-      min-width: 300px;
-      background: white;
-      border-radius: 12px;
-      padding: 40px;
-      color: rgb(42, 40, 41);
-      transform: translateY(0);
-      transition: all 0.4s ease;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      height: 250px; /* Set fixed height for consistency */
-    }
-
-    .testimonial-card::before {
-      content: '"';
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 60px;
-      color: rgba(42, 40, 41, 0.05);
-      font-family: Georgia, serif;
-    }
-
-    .testimonial-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .testimonial-content {
-      font-size: 16px;
-      line-height: 1.8;
-      position: relative;
-      z-index: 1;
-      color: rgba(42, 40, 41, 0.8);
-      flex: 1;
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      border-top: 1px solid rgba(42, 40, 41, 0.1);
-      padding-top: 20px;
-      margin-top: auto; /* Push to bottom */
-    }
-
-    .author-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgb(42, 40, 41);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .author-info {
-      flex-grow: 1;
-    }
-
-    .author-name {
-      font-weight: 500;
-      font-size: 16px;
-      margin-bottom: 4px;
-      color: rgb(42, 40, 41);
-    }
-
-    .author-title {
-      font-size: 14px;
-      color: rgba(42, 40, 41, 0.6);
-    }
-
-    .carousel-controls {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 40px;
-    }
-
-    .carousel-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(42, 40, 41, 0.2);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .carousel-dot.active {
-      background: rgb(42, 40, 41);
-      transform: scale(1.2);
+    @media (max-width: 480px) {
+      .testimonial-card { min-width: 200px; padding: 20px; height: 180px; }
     }
   </style>
 </head>
 <body>
   <nav>
-    <div class="logo"><a href="index.html">Databricks AI</a></div>
+    <div class="logo-container">
+      <div class="logo">
+        <a href="index.html">
+          <div class="logo-book"></div>
+          <div class="logo-page-left"></div>
+          <div class="logo-page-right"></div>
+          <div class="logo-ai"></div>
+          <div class="logo-ai-dot" style="top: 4px; left: 4px;"></div>
+          <div class="logo-ai-dot" style="top: 4px; right: 4px;"></div>
+          <div class="logo-ai-dot" style="bottom: 4px; left: 4px;"></div>
+          <div class="logo-ai-dot" style="bottom: 4px; right: 4px;"></div>
+        </a>
+      </div>
+      <div class="logo-text">Databricks AI</div>
+    </div>
     <div class="nav-links">
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact Us</a>
@@ -389,7 +419,6 @@
             </div>
           </div>
         </div>
-        
         <div class="testimonial-card">
           <div class="testimonial-content">
             "The ML integration is seamless, and the real-time processing capabilities have revolutionized how we handle our financial data."
@@ -402,7 +431,6 @@
             </div>
           </div>
         </div>
-        
         <div class="testimonial-card">
           <div class="testimonial-content">
             "Their expertise in AI and automation has helped us reduce bookkeeping costs by 60%. The ROI has been exceptional."
@@ -424,11 +452,9 @@
   </footer>
 
   <script>
-    // Add this at the beginning of your script section
+    // Navigation Scroll Effect
     document.addEventListener('DOMContentLoaded', () => {
       const nav = document.querySelector('nav');
-      
-      // Function to handle scroll
       function handleScroll() {
         if (window.scrollY > 50) {
           nav.classList.add('scrolled');
@@ -436,40 +462,12 @@
           nav.classList.remove('scrolled');
         }
       }
-
-      // Add scroll event listener
       window.addEventListener('scroll', handleScroll);
-      
-      // Check initial scroll position
       handleScroll();
     });
 
     // Graph Setup
     const ctx = document.getElementById('bookkeepingGraph').getContext('2d');
-    
-    // Add custom animation effects
-    const customAnimation = {
-      numbers: function(context) {
-        let dataset = context.dataset;
-        let delay = 0;
-        let duration = context.chart.options.animation.duration;
-        let easing = context.chart.options.animation.easing;
-        
-        return {
-          numbers: {
-            type: 'number',
-            properties: ['y'],
-            from: 0,
-            to: context.parsed.y,
-            delay: delay,
-            duration: duration,
-            easing: easing
-          }
-        };
-      }
-    };
-
-    // Create gradient backgrounds
     const gradientTime = ctx.createLinearGradient(0, 0, 0, 400);
     gradientTime.addColorStop(0, 'rgba(242, 140, 56, 0.5)');
     gradientTime.addColorStop(1, 'rgba(242, 140, 56, 0.0)');
@@ -520,11 +518,7 @@
             display: true,
             position: 'top',
             labels: {
-              font: { 
-                size: 14, 
-                family: 'Roboto',
-                weight: '500'
-              },
+              font: { size: 14, family: 'Roboto', weight: '500' },
               usePointStyle: true,
               pointStyle: 'circle'
             }
@@ -545,38 +539,15 @@
             },
             external: function(context) {
               const tooltipModel = context.tooltip;
-              if (tooltipModel.opacity === 0) {
-                return;
-              }
-              
-              if ('ontouchstart' in window) {
-                tooltipModel.yAlign = 'bottom';
-              }
-            }
-          },
-          dragData: {
-            round: 1,
-            dragX: false,  // Only allow vertical dragging
-            onDragStart: function(e, element) {
-              element.style.cursor = 'grab';
-            },
-            onDrag: function(e, datasetIndex, index, value) {
-              // Ensure values stay within reasonable bounds
-              if (datasetIndex === 0) { // Time Saved dataset
-                return value >= 0 && value <= 20;
-              } else { // Value Added dataset
-                return value >= 0 && value <= 1500;
-              }
-            },
-            onDragEnd: function(e, element) {
-              element.style.cursor = 'default';
+              if (tooltipModel.opacity === 0) return;
+              if ('ontouchstart' in window) tooltipModel.yAlign = 'bottom';
             }
           }
         },
         scales: {
           x: {
             title: { display: true, text: 'Time', color: 'rgb(42, 40, 41)', font: { size: 16, weight: '500' } },
-            grid: { display: false } /* Minimalistic */
+            grid: { display: false }
           },
           y: {
             title: { display: true, text: 'Value', color: 'rgb(42, 40, 41)', font: { size: 16, weight: '500' } },
@@ -597,10 +568,8 @@
       }
     });
 
-    // Replace the existing event listeners with new drag functionality
+    // Draggable Points
     const canvas = document.getElementById('bookkeepingGraph');
-
-    // Add draggable points functionality
     let isDragging = false;
     let selectedPoint = null;
 
@@ -617,26 +586,22 @@
       if (isDragging && selectedPoint) {
         const rect = canvas.getBoundingClientRect();
         const y = e.clientY - rect.top;
-        const chartArea = bookkeepingGraph.chartArea;
-        
-        // Convert mouse position to chart value
         const scales = bookkeepingGraph.scales;
         const newValue = scales.y.getValueForPixel(y);
         
-        // Update the data point
         const datasetIndex = selectedPoint.datasetIndex;
         const pointIndex = selectedPoint.index;
         
-        if (datasetIndex === 0) { // Time Saved dataset
-          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = 
-            Math.min(Math.max(Math.round(newValue), 0), 20);
-        } else { // Value Added dataset
-          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = 
-            Math.min(Math.max(Math.round(newValue), 0), 1500);
+        if (datasetIndex === 0) {
+          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = Math.min(Math.max(Math.round(newValue), 0), 20);
+        } else {
+          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = Math.min(Math.max(Math.round(newValue), 0), 1500);
         }
         
         bookkeepingGraph.update('none');
       }
+      const points = bookkeepingGraph.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
+      canvas.style.cursor = points.length ? 'grab' : 'default';
     });
 
     canvas.addEventListener('mouseup', () => {
@@ -651,15 +616,8 @@
       canvas.style.cursor = 'default';
     });
 
-    // Add hover effect to show draggable points
-    canvas.addEventListener('mousemove', (e) => {
-      const points = bookkeepingGraph.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
-      canvas.style.cursor = points.length ? 'grab' : 'default';
-    });
-
-    // Add touch event handlers for mobile interaction
     canvas.addEventListener('touchstart', (e) => {
-      e.preventDefault(); // Prevent scrolling while interacting with the graph
+      e.preventDefault();
       const touch = e.touches[0];
       const points = bookkeepingGraph.getElementsAtEventForMode(touch, 'nearest', { intersect: true }, false);
       if (points.length) {
@@ -680,12 +638,10 @@
         const datasetIndex = selectedPoint.datasetIndex;
         const pointIndex = selectedPoint.index;
         
-        if (datasetIndex === 0) { // Time Saved dataset
-          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = 
-            Math.min(Math.max(Math.round(newValue), 0), 20);
-        } else { // Value Added dataset
-          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = 
-            Math.min(Math.max(Math.round(newValue), 0), 1500);
+        if (datasetIndex === 0) {
+          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = Math.min(Math.max(Math.round(newValue), 0), 20);
+        } else {
+          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = Math.min(Math.max(Math.round(newValue), 0), 1500);
         }
         
         bookkeepingGraph.update('none');
@@ -697,21 +653,20 @@
       selectedPoint = null;
     });
 
-    // Replace the testimonial scrolling code with this simplified version
+    // Testimonials Infinite Scroll
     document.addEventListener('DOMContentLoaded', () => {
       const track = document.getElementById('testimonialTrack');
       const cards = track.getElementsByClassName('testimonial-card');
       let currentTranslate = 0;
       
-      // Clone the testimonials for infinite scroll
       Array.from(cards).forEach(card => {
         const clone = card.cloneNode(true);
         track.appendChild(clone);
       });
 
       function scrollTestimonials() {
-        currentTranslate -= 0.5; // Adjust speed as needed
-        const cardWidth = cards[0].offsetWidth + 30; // card width + gap
+        currentTranslate -= 0.5;
+        const cardWidth = cards[0].offsetWidth + 30;
         const totalWidth = cardWidth * (cards.length / 2);
         
         if (Math.abs(currentTranslate) >= totalWidth) {
@@ -722,10 +677,8 @@
         requestAnimationFrame(scrollTestimonials);
       }
 
-      // Start the animation
       requestAnimationFrame(scrollTestimonials);
 
-      // Pause on hover
       track.addEventListener('mouseenter', () => {
         track.style.animationPlayState = 'paused';
       });

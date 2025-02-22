@@ -22,20 +22,96 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 40px;
-      background: rgb(42, 40, 41);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      background: transparent;
+      box-shadow: none;
       position: sticky;
       top: 0;
       z-index: 10;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      background: rgb(42, 40, 41);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo {
+      position: relative;
+      width: 40px;
+      height: 40px;
     }
     .logo a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+    }
+    .logo-book {
+      position: absolute;
+      width: 24px;
+      height: 34px;
+      background: rgb(224, 224, 219);
+      left: 8px;
+      top: 3px;
+      border-radius: 2px 0 0 2px;
+      box-shadow: inset -2px 0 0 rgba(242, 140, 56, 0.8),
+                inset -4px 0 0 rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease;
+    }
+    .logo-page-left {
+      position: absolute;
+      width: 10px;
+      height: 28px;
+      background: rgba(42, 40, 41, 0.8);
+      left: 10px;
+      top: 6px;
+      border-radius: 1px;
+      transform: skewY(-5deg);
+    }
+    .logo-page-right {
+      position: absolute;
+      width: 10px;
+      height: 28px;
+      background: rgba(42, 40, 41, 0.6);
+      left: 20px;
+      top: 6px;
+      border-radius: 1px;
+      transform: skewY(5deg);
+    }
+    .logo-ai {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      left: 0;
+      top: 0;
+      border: 2px solid #f28c38;
+      border-radius: 50%;
+      animation: pulse 2s infinite ease-in-out;
+    }
+    .logo-ai-dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #f28c38;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    .logo:hover .logo-book {
+      transform: rotate(-5deg);
+    }
+    .logo:hover .logo-ai-dot:nth-child(4) { transform: translate(8px, -8px); }
+    .logo:hover .logo-ai-dot:nth-child(5) { transform: translate(-8px, 8px); }
+    .logo:hover .logo-ai-dot:nth-child(6) { transform: translate(8px, 8px); }
+    .logo-text {
       font-size: 24px;
       font-weight: 500;
       color: rgb(224, 224, 219);
-      text-decoration: none;
       transition: color 0.3s;
     }
-    .logo a:hover { color: #f28c38; }
+    .logo-container:hover .logo-text { color: #f28c38; }
     .nav-links a {
       color: rgb(224, 224, 219);
       text-decoration: none;
@@ -47,52 +123,28 @@
 
     /* Content Section */
     .content {
-      padding: 60px 40px;
+      padding: 60px 20px;
+      text-align: center;
       background: rgb(224, 224, 219);
       min-height: calc(100vh - 140px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
     .content h1 {
       font-size: 36px;
       color: rgb(42, 40, 41);
-      margin-bottom: 30px;
-      font-weight: 500;
-      max-width: 700px;
-      width: 100%;
-      text-align: left;
-    }
-
-    /* Support Section */
-    .support-section {
-      max-width: 700px;
-      width: 100%;
-      margin-bottom: 40px;
-      text-align: left;
-    }
-    .support-section h2 {
-      font-size: 28px;
-      color: rgb(42, 40, 41);
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       font-weight: 500;
     }
-    .support-section h3 {
-      font-size: 20px;
-      color: rgb(42, 40, 41);
-      margin: 20px 0 10px;
-      font-weight: 500;
-    }
-    .support-section p {
+    .content p {
       font-size: 16px;
       color: rgb(42, 40, 41);
-      margin: 0 0 15px;
+      max-width: 800px;
+      margin: 0 auto 15px;
     }
 
     /* Contact Form */
     .contact-form {
-      max-width: 700px;
-      width: 100%;
+      max-width: 600px;
+      margin: 0 auto 40px;
       text-align: left;
     }
     .form-group {
@@ -121,7 +173,7 @@
       background: #fff;
       color: rgb(42, 40, 41);
       box-sizing: border-box;
-      transition: border-color 0.3s, box-shadow 0.3s;
+      transition: border-color 0.3s;
     }
     .form-group textarea {
       height: 150px;
@@ -131,7 +183,6 @@
     .form-group textarea:focus {
       outline: none;
       border-color: #f28c38;
-      box-shadow: 0 0 5px rgba(242, 140, 56, 0.5);
     }
     .form-group .error {
       color: #e07b30;
@@ -147,13 +198,33 @@
       border-radius: 5px;
       font-size: 18px;
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
+      transition: background 0.3s;
       width: 100%;
     }
-    .contact-btn:hover,
-    .contact-btn:active {
-      background: #e07b30;
-      transform: scale(1.05);
+    .contact-btn:hover { background: #e07b30; }
+
+    /* Support Section */
+    .support-section {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .support-section h2 {
+      font-size: 28px;
+      color: rgb(42, 40, 41);
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+    .support-section h3 {
+      font-size: 20px;
+      color: rgb(42, 40, 41);
+      margin: 20px 0 10px;
+      font-weight: 500;
+    }
+    .support-section p {
+      font-size: 16px;
+      color: rgb(42, 40, 41);
+      margin: 0 0 15px;
     }
 
     /* Footer */
@@ -166,22 +237,35 @@
       border-top: 1px solid rgb(224, 224, 219);
     }
 
+    /* Animations */
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
     /* Media Queries for Mobile */
     @media (max-width: 768px) {
       nav { padding: 15px 20px; }
-      .logo a { font-size: 20px; }
+      .logo { width: 30px; height: 30px; }
+      .logo-book { width: 18px; height: 26px; left: 6px; top: 2px; }
+      .logo-page-left { width: 8px; height: 22px; left: 7px; top: 4px; }
+      .logo-page-right { width: 8px; height: 22px; left: 15px; top: 4px; }
+      .logo-ai { width: 10px; height: 10px; }
+      .logo-ai-dot { width: 3px; height: 3px; }
+      .logo-text { font-size: 18px; }
       .nav-links a { margin-left: 15px; font-size: 14px; }
       .content { padding: 40px 15px; }
       .content h1 { font-size: 28px; }
-      .support-section { max-width: 100%; }
-      .support-section h2 { font-size: 24px; }
-      .support-section h3 { font-size: 18px; }
-      .support-section p { font-size: 14px; }
+      .content p { font-size: 14px; }
       .contact-form { max-width: 100%; }
       .form-group.name-group { flex-direction: row; gap: 10px; }
       .form-group input,
       .form-group textarea { font-size: 14px; }
       .contact-btn { padding: 10px 20px; font-size: 16px; }
+      .support-section h2 { font-size: 24px; }
+      .support-section h3 { font-size: 18px; }
+      .support-section p { font-size: 14px; }
     }
     @media (max-width: 480px) {
       .form-group.name-group { flex-direction: column; gap: 20px; }
@@ -190,7 +274,21 @@
 </head>
 <body>
   <nav>
-    <div class="logo"><a href="index.html">Databricks AI</a></div>
+    <div class="logo-container">
+      <div class="logo">
+        <a href="index.html">
+          <div class="logo-book"></div>
+          <div class="logo-page-left"></div>
+          <div class="logo-page-right"></div>
+          <div class="logo-ai"></div>
+          <div class="logo-ai-dot" style="top: 4px; left: 4px;"></div>
+          <div class="logo-ai-dot" style="top: 4px; right: 4px;"></div>
+          <div class="logo-ai-dot" style="bottom: 4px; left: 4px;"></div>
+          <div class="logo-ai-dot" style="bottom: 4px; right: 4px;"></div>
+        </a>
+      </div>
+      <div class="logo-text">Databricks AI</div>
+    </div>
     <div class="nav-links">
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact Us</a>
@@ -199,16 +297,7 @@
 
   <div class="content">
     <h1>Contact Us</h1>
-    <div class="support-section">
-      <h2>DataBricks Support Center</h2>
-      <p>DataBricks offers US-Based, personalized support. Please fill out our contact form and a customer success representative will get back to you within one business day.</p>
-      <h3>Visit Us for Local Support</h3>
-      <p>4755 Lake Trail Dr, Suite 101, Lisle, IL, 60532</p>
-      <p>By Appointment</p>
-      <h3>In-person Support Business Hours</h3>
-      <p>9am-5pm PT, Monday through Friday</p>
-    </div>
-
+    <p>We’d love to hear from you! Fill out the form below to get in touch.</p>
     <form class="contact-form" id="contactForm" novalidate>
       <div class="form-group name-group">
         <div>
@@ -244,6 +333,16 @@
       </div>
       <button type="submit" class="contact-btn">Submit</button>
     </form>
+
+    <div class="support-section">
+      <h2>DataBricks Support Center</h2>
+      <p>DataBricks offers US-Based, personalized support. Please fill out our contact form and a customer success representative will get back to you within one business day.</p>
+      <h3>Visit Us for Local Support</h3>
+      <p>4755 Lake Trail Dr, Suite 101, Lisle, IL, 60532</p>
+      <p>By Appointment</p>
+      <h3>In-person Support Business Hours</h3>
+      <p>9am-5pm PT, Monday through Friday</p>
+    </div>
   </div>
 
   <footer>
@@ -251,102 +350,66 @@
   </footer>
 
   <script>
-    const form = document.getElementById('contactForm');
-    const fields = ['firstName', 'lastName', 'email', 'phone', 'subject', 'description'];
-
-    // Real-time validation
-    fields.forEach(field => {
-      const input = document.getElementById(field);
-      input.addEventListener('input', () => validateField(field));
-    });
-
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      // Reset error messages
-      document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
-
-      // Get form values
-      const firstName = document.getElementById('firstName').value.trim();
-      const lastName = document.getElementById('lastName').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const subject = document.getElementById('subject').value.trim();
-      const description = document.getElementById('description').value.trim();
-
-      // Validation flags
-      let isValid = true;
-
-      // First Name validation
-      if (!firstName) {
-        showError('firstNameError');
-        isValid = false;
+    // Navigation Scroll Effect
+    document.addEventListener('DOMContentLoaded', () => {
+      const nav = document.querySelector('nav');
+      function handleScroll() {
+        if (window.scrollY > 50) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
       }
+      window.addEventListener('scroll', handleScroll);
+      handleScroll();
 
-      // Last Name validation
-      if (!lastName) {
-        showError('lastNameError');
-        isValid = false;
-      }
+      // Form Validation
+      document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
 
-      // Email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        showError('emailError');
-        isValid = false;
-      }
+        const firstName = document.getElementById('firstName').value.trim();
+        const lastName = document.getElementById('lastName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const subject = document.getElementById('subject').value.trim();
+        const description = document.getElementById('description').value.trim();
 
-      // Phone validation
-      const phoneRegex = /^(\(\d{3}\)\s?|\d{3}-?)\d{3}-?\d{4}$/;
-      if (!phoneRegex.test(phone)) {
-        showError('phoneError');
-        isValid = false;
-      }
+        let isValid = true;
 
-      // Subject validation
-      if (!subject) {
-        showError('subjectError');
-        isValid = false;
-      }
-
-      // Description validation
-      if (!description) {
-        showError('descriptionError');
-        isValid = false;
-      }
-
-      // If valid, show success message and reset form
-      if (isValid) {
-        alert('Thank you for your submission, ' + firstName + '! We’ll get back to you soon.');
-        form.reset();
-      }
-    });
-
-    function validateField(fieldId) {
-      const input = document.getElementById(fieldId);
-      const error = document.getElementById(fieldId + 'Error');
-      const value = input.value.trim();
-
-      error.style.display = 'none';
-
-      if (fieldId === 'email') {
+        if (!firstName) {
+          document.getElementById('firstNameError').style.display = 'block';
+          isValid = false;
+        }
+        if (!lastName) {
+          document.getElementById('lastNameError').style.display = 'block';
+          isValid = false;
+        }
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (value && !emailRegex.test(value)) {
-          error.style.display = 'block';
+        if (!emailRegex.test(email)) {
+          document.getElementById('emailError').style.display = 'block';
+          isValid = false;
         }
-      } else if (fieldId === 'phone') {
         const phoneRegex = /^(\(\d{3}\)\s?|\d{3}-?)\d{3}-?\d{4}$/;
-        if (value && !phoneRegex.test(value)) {
-          error.style.display = 'block';
+        if (!phoneRegex.test(phone)) {
+          document.getElementById('phoneError').style.display = 'block';
+          isValid = false;
         }
-      } else if (!value) {
-        error.style.display = 'block';
-      }
-    }
+        if (!subject) {
+          document.getElementById('subjectError').style.display = 'block';
+          isValid = false;
+        }
+        if (!description) {
+          document.getElementById('descriptionError').style.display = 'block';
+          isValid = false;
+        }
 
-    function showError(errorId) {
-      document.getElementById(errorId).style.display = 'block';
-    }
+        if (isValid) {
+          alert('Thank you for your submission, ' + firstName + '! We’ll get back to you soon.');
+          document.getElementById('contactForm').reset();
+        }
+      });
+    });
   </script>
 </body>
 </html>
