@@ -542,6 +542,16 @@
                 }
                 return label;
               }
+            },
+            external: function(context) {
+              const tooltipModel = context.tooltip;
+              if (tooltipModel.opacity === 0) {
+                return;
+              }
+              
+              if ('ontouchstart' in window) {
+                tooltipModel.yAlign = 'bottom';
+              }
             }
           },
           dragData: {
@@ -575,13 +585,15 @@
         },
         interaction: {
           intersect: true,
-          mode: 'nearest'
+          mode: 'nearest',
+          axis: 'xy'
         },
         hover: {
           mode: 'nearest',
           intersect: true,
           animationDuration: 400
-        }
+        },
+        events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove', 'touchend']
       }
     });
 
@@ -643,6 +655,46 @@
     canvas.addEventListener('mousemove', (e) => {
       const points = bookkeepingGraph.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
       canvas.style.cursor = points.length ? 'grab' : 'default';
+    });
+
+    // Add touch event handlers for mobile interaction
+    canvas.addEventListener('touchstart', (e) => {
+      e.preventDefault(); // Prevent scrolling while interacting with the graph
+      const touch = e.touches[0];
+      const points = bookkeepingGraph.getElementsAtEventForMode(touch, 'nearest', { intersect: true }, false);
+      if (points.length) {
+        isDragging = true;
+        selectedPoint = points[0];
+      }
+    });
+
+    canvas.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      if (isDragging && selectedPoint) {
+        const touch = e.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        const y = touch.clientY - rect.top;
+        const scales = bookkeepingGraph.scales;
+        const newValue = scales.y.getValueForPixel(y);
+        
+        const datasetIndex = selectedPoint.datasetIndex;
+        const pointIndex = selectedPoint.index;
+        
+        if (datasetIndex === 0) { // Time Saved dataset
+          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = 
+            Math.min(Math.max(Math.round(newValue), 0), 20);
+        } else { // Value Added dataset
+          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = 
+            Math.min(Math.max(Math.round(newValue), 0), 1500);
+        }
+        
+        bookkeepingGraph.update('none');
+      }
+    });
+
+    canvas.addEventListener('touchend', () => {
+      isDragging = false;
+      selectedPoint = null;
     });
 
     // Replace the testimonial scrolling code with this simplified version
