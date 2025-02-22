@@ -4,15 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Databricks AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
   <style>
     /* General Styles */
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
-      color: rgb(224, 224, 219); /* Foreground: light greyish-beige */
+      color: rgb(224, 224, 219);
       line-height: 1.6;
-      background: rgb(42, 40, 41); /* Background: dark grey */
+      background: rgb(42, 40, 41);
     }
 
     /* Navigation */
@@ -21,13 +24,27 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 40px;
-      background: rgb(42, 40, 41);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      background: transparent;
+      box-shadow: none;
       position: sticky;
       top: 0;
       z-index: 10;
+      transition: all 0.3s ease;
     }
-    .logo { font-size: 24px; font-weight: bold; color: rgb(224, 224, 219); }
+
+    nav.scrolled {
+      background: rgb(42, 40, 41);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo a {
+      font-size: 24px;
+      font-weight: 500;
+      color: rgb(224, 224, 219);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .logo a:hover { color: #f28c38; }
     .nav-links a {
       color: rgb(224, 224, 219);
       text-decoration: none;
@@ -35,115 +52,77 @@
       font-size: 16px;
       transition: color 0.3s;
     }
-    .nav-links a:hover { color: #f28c38; /* Orange accent */ }
+    .nav-links a:hover { color: #f28c38; }
 
     /* Hero Section */
     .hero {
       text-align: center;
       padding: 100px 20px;
-      background: rgb(224, 224, 219); /* Light greyish-beige */
+      background: rgb(224, 224, 219);
+      animation: fadeIn 1.5s ease-in-out;
     }
     .hero h1 {
       font-size: 48px;
       margin: 0 0 20px;
-      color: rgb(42, 40, 41); /* Dark grey for contrast */
-      font-weight: normal;
+      color: rgb(42, 40, 41);
+      font-weight: 500;
     }
     .hero .sub-tagline {
       font-size: 20px;
       color: rgb(42, 40, 41);
       margin: 0 0 30px;
     }
-    .hero-btn {
-      background: #f28c38;
-      color: #fff;
-      padding: 12px 30px;
-      border: none;
-      border-radius: 5px;
-      font-size: 18px;
-      cursor: pointer;
-      transition: background 0.3s;
+    .graph-container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+      background: transparent; /* Minimalistic */
+      animation: slideUp 1s ease-out 0.5s backwards;
     }
-    .hero-btn:hover { background: #e07b30; }
+    .graph-container h2 {
+      font-size: 24px;
+      color: rgb(42, 40, 41);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    canvas#bookkeepingGraph {
+      max-height: 400px;
+    }
 
-    /* Expertise Section */
-    .expertise {
-      padding: 60px 20px;
+    /* Other Sections */
+    .expertise, .ml-apps, .our-approach, .testimonials {
+      padding: 60px 40px;
       text-align: center;
       background: rgb(42, 40, 41);
+      animation: fadeIn 1s ease-in-out;
     }
-    .expertise h2 {
+    .ml-apps { background: rgb(224, 224, 219); }
+    .testimonials { background: rgb(224, 224, 219); }
+    h2 {
       font-size: 36px;
       color: rgb(224, 224, 219);
       margin-bottom: 40px;
-      font-weight: normal;
+      font-weight: 500;
     }
-    .expertise-item {
-      max-width: 800px;
-      margin: 0 auto 40px;
+    .ml-apps h2, .testimonials h2 {
+      color: rgb(42, 40, 41);
+    }
+    .expertise-item, .ml-apps p, .our-approach p {
+      max-width: 700px;
+      margin: 0 auto;
     }
     .expertise-item h3 {
       color: #f28c38;
       font-size: 24px;
       margin: 0 0 15px;
-      font-weight: normal;
+      font-weight: 500;
     }
-    .expertise-item p {
+    .expertise-item p, .ml-apps p, .our-approach p {
       font-size: 16px;
       color: rgb(224, 224, 219);
-      margin: 0;
-      text-align: left;
     }
-
-    /* ML Apps Section */
-    .ml-apps {
-      padding: 60px 20px;
-      text-align: center;
-      background: rgb(224, 224, 219);
-    }
-    .ml-apps h2 {
-      font-size: 36px;
+    .ml-apps p, .testimonials p {
       color: rgb(42, 40, 41);
-      margin-bottom: 20px;
-      font-weight: normal;
-    }
-    .ml-apps p {
-      font-size: 16px;
-      color: rgb(42, 40, 41);
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    /* Our Approach Section */
-    .our-approach {
-      padding: 60px 20px;
-      text-align: center;
-      background: rgb(42, 40, 41);
-    }
-    .our-approach h2 {
-      font-size: 36px;
-      color: rgb(224, 224, 219);
-      margin-bottom: 20px;
-      font-weight: normal;
-    }
-    .our-approach p {
-      font-size: 16px;
-      color: rgb(224, 224, 219);
-      max-width: 800px;
-      margin: 0 auto 15px;
-    }
-
-    /* Testimonial Section */
-    .testimonials {
-      padding: 60px 20px;
-      background: rgb(224, 224, 219);
-      text-align: center;
-    }
-    .testimonials h2 {
-      font-size: 36px;
-      color: rgb(42, 40, 41);
-      margin-bottom: 40px;
-      font-weight: normal;
     }
     .testimonial-scroll {
       display: flex;
@@ -164,6 +143,7 @@
       color: rgb(224, 224, 219);
       flex-shrink: 0;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      animation: slideIn 1s ease-out;
     }
     .testimonial-item p {
       margin: 0 0 10px;
@@ -172,7 +152,7 @@
     }
     .testimonial-item span {
       color: #f28c38;
-      font-weight: bold;
+      font-weight: 500;
       font-size: 14px;
     }
 
@@ -184,36 +164,169 @@
       padding: 20px;
       font-size: 14px;
       border-top: 1px solid rgb(224, 224, 219);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes slideIn {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
     }
 
     /* Media Queries for Mobile */
     @media (max-width: 768px) {
       nav { padding: 15px 20px; }
-      .logo { font-size: 20px; }
+      .logo a { font-size: 20px; }
       .nav-links a { margin-left: 15px; font-size: 14px; }
       .hero { padding: 60px 15px; }
       .hero h1 { font-size: 36px; }
       .hero .sub-tagline { font-size: 18px; }
-      .hero-btn { padding: 10px 20px; font-size: 16px; }
-      .expertise { padding: 40px 15px; }
-      .expertise h2 { font-size: 28px; }
+      .graph-container { max-width: 100%; padding: 15px; }
+      .graph-container h2 { font-size: 20px; }
+      .expertise, .ml-apps, .our-approach, .testimonials { padding: 40px 15px; }
+      h2 { font-size: 28px; }
       .expertise-item h3 { font-size: 20px; }
-      .expertise-item p { font-size: 14px; }
-      .ml-apps { padding: 40px 15px; }
-      .ml-apps h2 { font-size: 28px; }
-      .our-approach { padding: 40px 15px; }
-      .our-approach h2 { font-size: 28px; }
-      .testimonials { padding: 40px 15px; }
-      .testimonials h2 { font-size: 28px; }
+      .expertise-item p, .ml-apps p, .our-approach p { font-size: 14px; }
       .testimonial-item { min-width: 200px; padding: 10px; }
+    }
+
+    /* Replace the existing testimonials styles */
+    .testimonials {
+      background: rgb(224, 224, 219);
+      padding: 80px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonial-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .testimonial-track {
+      display: flex;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      gap: 30px;
+      padding: 20px 0;
+    }
+
+    .testimonial-card {
+      min-width: 300px;
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      color: rgb(42, 40, 41);
+      transform: translateY(0);
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 250px; /* Set fixed height for consistency */
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 60px;
+      color: rgba(42, 40, 41, 0.05);
+      font-family: Georgia, serif;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .testimonial-content {
+      font-size: 16px;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+      color: rgba(42, 40, 41, 0.8);
+      flex: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-top: 1px solid rgba(42, 40, 41, 0.1);
+      padding-top: 20px;
+      margin-top: auto; /* Push to bottom */
+    }
+
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgb(42, 40, 41);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .author-info {
+      flex-grow: 1;
+    }
+
+    .author-name {
+      font-weight: 500;
+      font-size: 16px;
+      margin-bottom: 4px;
+      color: rgb(42, 40, 41);
+    }
+
+    .author-title {
+      font-size: 14px;
+      color: rgba(42, 40, 41, 0.6);
+    }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(42, 40, 41, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-dot.active {
+      background: rgb(42, 40, 41);
+      transform: scale(1.2);
     }
   </style>
 </head>
 <body>
   <nav>
-    <div class="logo">Databricks AI</div>
+    <div class="logo"><a href="index.html">Databricks AI</a></div>
     <div class="nav-links">
-      <a href="index.html">Home</a>
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact Us</a>
     </div>
@@ -222,7 +335,10 @@
   <div class="hero">
     <h1>Pioneering IT for Tomorrow</h1>
     <div class="sub-tagline">For Engineers By Engineers</div>
-    <button class="hero-btn" id="exploreBtn">Explore Now</button>
+    <div class="graph-container">
+      <h2>Time Savings & Value in Bookkeeping</h2>
+      <canvas id="bookkeepingGraph"></canvas>
+    </div>
   </div>
 
   <div class="expertise">
@@ -259,22 +375,46 @@
 
   <div class="testimonials">
     <h2>What Our Clients Say</h2>
-    <div class="testimonial-scroll">
-      <div class="testimonial-item">
-        <p>"Databricks AI transformed our mobile strategy with an ML-powered iOS app."</p>
-        <span>- TechCorp CEO</span>
-      </div>
-      <div class="testimonial-item">
-        <p>"Their Kotlin expertise delivered a seamless Android experience."</p>
-        <span>- InnovateNow Founder</span>
-      </div>
-      <div class="testimonial-item">
-        <p>"The team’s cloud and AI integration is unmatched."</p>
-        <span>- DataSync CTO</span>
-      </div>
-      <div class="testimonial-item">
-        <p>"Fast, reliable, and cutting-edge—our app’s a game-changer."</p>
-        <span>- FutureLabs VP</span>
+    <div class="testimonial-container">
+      <div class="testimonial-track" id="testimonialTrack" style="display: flex; transition: transform 0.5s ease;">
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            "Databricks AI transformed our entire financial workflow. The AI-powered bookkeeping solution has saved us countless hours and improved our accuracy dramatically."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">JD</div>
+            <div class="author-info">
+              <div class="author-name">John Doe</div>
+              <div class="author-title">TechCorp CEO</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            "The ML integration is seamless, and the real-time processing capabilities have revolutionized how we handle our financial data."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">AS</div>
+            <div class="author-info">
+              <div class="author-name">Alice Smith</div>
+              <div class="author-title">InnovateNow Founder</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            "Their expertise in AI and automation has helped us reduce bookkeeping costs by 60%. The ROI has been exceptional."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">RJ</div>
+            <div class="author-info">
+              <div class="author-name">Robert Johnson</div>
+              <div class="author-title">DataSync CTO</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -284,20 +424,264 @@
   </footer>
 
   <script>
-    const exploreBtn = document.getElementById('exploreBtn');
-    exploreBtn.addEventListener('mouseover', () => {
-      exploreBtn.style.background = '#e07b30';
-    });
-    exploreBtn.addEventListener('mouseout', () => {
-      exploreBtn.style.background = '#f28c38';
-    });
-    exploreBtn.addEventListener('click', () => {
-      alert('Ready to dive into Databricks AI? Let’s connect!');
+    // Add this at the beginning of your script section
+    document.addEventListener('DOMContentLoaded', () => {
+      const nav = document.querySelector('nav');
+      
+      // Function to handle scroll
+      function handleScroll() {
+        if (window.scrollY > 50) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+
+      // Add scroll event listener
+      window.addEventListener('scroll', handleScroll);
+      
+      // Check initial scroll position
+      handleScroll();
     });
 
-    // Duplicate testimonials for seamless scroll
-    const scrollContainer = document.querySelector('.testimonial-scroll');
-    scrollContainer.innerHTML += scrollContainer.innerHTML;
+    // Graph Setup
+    const ctx = document.getElementById('bookkeepingGraph').getContext('2d');
+    
+    // Add custom animation effects
+    const customAnimation = {
+      numbers: function(context) {
+        let dataset = context.dataset;
+        let delay = 0;
+        let duration = context.chart.options.animation.duration;
+        let easing = context.chart.options.animation.easing;
+        
+        return {
+          numbers: {
+            type: 'number',
+            properties: ['y'],
+            from: 0,
+            to: context.parsed.y,
+            delay: delay,
+            duration: duration,
+            easing: easing
+          }
+        };
+      }
+    };
+
+    // Create gradient backgrounds
+    const gradientTime = ctx.createLinearGradient(0, 0, 0, 400);
+    gradientTime.addColorStop(0, 'rgba(242, 140, 56, 0.5)');
+    gradientTime.addColorStop(1, 'rgba(242, 140, 56, 0.0)');
+
+    const gradientValue = ctx.createLinearGradient(0, 0, 0, 400);
+    gradientValue.addColorStop(0, 'rgba(66, 165, 245, 0.5)');
+    gradientValue.addColorStop(1, 'rgba(66, 165, 245, 0.0)');
+
+    const bookkeepingGraph = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Manual (20h)', 'Initial Setup', '1 Month', '3 Months', '6 Months', '1 Year'],
+        datasets: [{
+          label: 'Time Saved (Hours)',
+          data: [20, 18, 10, 5, 3, 2],
+          borderColor: '#f28c38',
+          backgroundColor: gradientTime,
+          fill: true,
+          tension: 0.4,
+          pointBackgroundColor: '#f28c38',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: '#f28c38',
+          pointRadius: 6,
+          pointHoverRadius: 8,
+          borderWidth: 3
+        }, {
+          label: 'Value Added ($)',
+          data: [0, 100, 300, 600, 900, 1200],
+          borderColor: '#42a5f5',
+          backgroundColor: gradientValue,
+          fill: true,
+          tension: 0.4,
+          pointBackgroundColor: '#42a5f5',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: '#42a5f5',
+          pointRadius: 6,
+          pointHoverRadius: 8,
+          borderWidth: 3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              font: { 
+                size: 14, 
+                family: 'Roboto',
+                weight: '500'
+              },
+              usePointStyle: true,
+              pointStyle: 'circle'
+            }
+          },
+          tooltip: {
+            enabled: true,
+            mode: 'nearest',
+            intersect: false,
+            callbacks: {
+              label: function(context) {
+                let label = context.dataset.label || '';
+                if (label) label += ': ';
+                if (context.parsed.y !== null) {
+                  label += context.dataset.label.includes('Time') ? `${context.parsed.y} hours` : `$${context.parsed.y}`;
+                }
+                return label;
+              }
+            }
+          },
+          dragData: {
+            round: 1,
+            dragX: false,  // Only allow vertical dragging
+            onDragStart: function(e, element) {
+              element.style.cursor = 'grab';
+            },
+            onDrag: function(e, datasetIndex, index, value) {
+              // Ensure values stay within reasonable bounds
+              if (datasetIndex === 0) { // Time Saved dataset
+                return value >= 0 && value <= 20;
+              } else { // Value Added dataset
+                return value >= 0 && value <= 1500;
+              }
+            },
+            onDragEnd: function(e, element) {
+              element.style.cursor = 'default';
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: { display: true, text: 'Time', color: 'rgb(42, 40, 41)', font: { size: 16, weight: '500' } },
+            grid: { display: false } /* Minimalistic */
+          },
+          y: {
+            title: { display: true, text: 'Value', color: 'rgb(42, 40, 41)', font: { size: 16, weight: '500' } },
+            grid: { color: 'rgba(42, 40, 41, 0.1)' }
+          }
+        },
+        interaction: {
+          intersect: true,
+          mode: 'nearest'
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true,
+          animationDuration: 400
+        }
+      }
+    });
+
+    // Replace the existing event listeners with new drag functionality
+    const canvas = document.getElementById('bookkeepingGraph');
+
+    // Add draggable points functionality
+    let isDragging = false;
+    let selectedPoint = null;
+
+    canvas.addEventListener('mousedown', (e) => {
+      const points = bookkeepingGraph.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
+      if (points.length) {
+        isDragging = true;
+        selectedPoint = points[0];
+        canvas.style.cursor = 'grabbing';
+      }
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (isDragging && selectedPoint) {
+        const rect = canvas.getBoundingClientRect();
+        const y = e.clientY - rect.top;
+        const chartArea = bookkeepingGraph.chartArea;
+        
+        // Convert mouse position to chart value
+        const scales = bookkeepingGraph.scales;
+        const newValue = scales.y.getValueForPixel(y);
+        
+        // Update the data point
+        const datasetIndex = selectedPoint.datasetIndex;
+        const pointIndex = selectedPoint.index;
+        
+        if (datasetIndex === 0) { // Time Saved dataset
+          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = 
+            Math.min(Math.max(Math.round(newValue), 0), 20);
+        } else { // Value Added dataset
+          bookkeepingGraph.data.datasets[datasetIndex].data[pointIndex] = 
+            Math.min(Math.max(Math.round(newValue), 0), 1500);
+        }
+        
+        bookkeepingGraph.update('none');
+      }
+    });
+
+    canvas.addEventListener('mouseup', () => {
+      isDragging = false;
+      selectedPoint = null;
+      canvas.style.cursor = 'default';
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+      isDragging = false;
+      selectedPoint = null;
+      canvas.style.cursor = 'default';
+    });
+
+    // Add hover effect to show draggable points
+    canvas.addEventListener('mousemove', (e) => {
+      const points = bookkeepingGraph.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
+      canvas.style.cursor = points.length ? 'grab' : 'default';
+    });
+
+    // Replace the testimonial scrolling code with this simplified version
+    document.addEventListener('DOMContentLoaded', () => {
+      const track = document.getElementById('testimonialTrack');
+      const cards = track.getElementsByClassName('testimonial-card');
+      let currentTranslate = 0;
+      
+      // Clone the testimonials for infinite scroll
+      Array.from(cards).forEach(card => {
+        const clone = card.cloneNode(true);
+        track.appendChild(clone);
+      });
+
+      function scrollTestimonials() {
+        currentTranslate -= 0.5; // Adjust speed as needed
+        const cardWidth = cards[0].offsetWidth + 30; // card width + gap
+        const totalWidth = cardWidth * (cards.length / 2);
+        
+        if (Math.abs(currentTranslate) >= totalWidth) {
+          currentTranslate = 0;
+        }
+        
+        track.style.transform = `translateX(${currentTranslate}px)`;
+        requestAnimationFrame(scrollTestimonials);
+      }
+
+      // Start the animation
+      requestAnimationFrame(scrollTestimonials);
+
+      // Pause on hover
+      track.addEventListener('mouseenter', () => {
+        track.style.animationPlayState = 'paused';
+      });
+
+      track.addEventListener('mouseleave', () => {
+        track.style.animationPlayState = 'running';
+      });
+    });
   </script>
 </body>
 </html>

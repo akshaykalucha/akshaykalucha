@@ -5,30 +5,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us - Databricks AI</title>
   <style>
-    body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; color: #222; line-height: 1.6; }
-    nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: #fff; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
-    .logo { font-size: 24px; font-weight: bold; color: #2c3e50; }
-    .nav-links a { color: #2c3e50; text-decoration: none; margin-left: 25px; font-size: 16px; transition: color 0.3s; }
-    .nav-links a:hover { color: #e67e22; }
-    .content { padding: 60px 40px; text-align: center; max-width: 800px; margin: 0 auto; }
-    .content h1 { font-size: 40px; color: #2c3e50; margin-bottom: 20px; }
-    .content p { font-size: 18px; color: #7f8c8d; }
-    footer { background: #2c3e50; color: #ecf0f1; text-align: center; padding: 20px; font-size: 14px; }
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: rgb(224, 224, 219);
+      line-height: 1.6;
+      background: rgb(42, 40, 41);
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgb(42, 40, 41);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo a {
+      font-size: 24px;
+      font-weight: bold;
+      color: rgb(224, 224, 219);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .logo a:hover { color: #f28c38; }
+    .nav-links a {
+      color: rgb(224, 224, 219);
+      text-decoration: none;
+      margin-left: 30px;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: #f28c38; }
+
+    /* Content Section */
+    .content {
+      padding: 60px 20px;
+      text-align: center;
+      background: rgb(224, 224, 219);
+      min-height: calc(100vh - 140px); /* Full height minus nav and footer */
+    }
+    .content h1 {
+      font-size: 36px;
+      color: rgb(42, 40, 41);
+      margin-bottom: 20px;
+      font-weight: normal;
+    }
+    .content p {
+      font-size: 16px;
+      color: rgb(42, 40, 41);
+      max-width: 800px;
+      margin: 0 auto 15px;
+    }
+
+    /* Footer */
+    footer {
+      background: rgb(42, 40, 41);
+      color: rgb(224, 224, 219);
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      border-top: 1px solid rgb(224, 224, 219);
+    }
+
+    /* Media Queries for Mobile */
+    @media (max-width: 768px) {
+      nav { padding: 15px 20px; }
+      .logo a { font-size: 20px; }
+      .nav-links a { margin-left: 15px; font-size: 14px; }
+      .content { padding: 40px 15px; }
+      .content h1 { font-size: 28px; }
+      .content p { font-size: 14px; }
+    }
   </style>
 </head>
 <body>
   <nav>
-    <div class="logo">Databricks AI</div>
+    <div class="logo"><a href="index.html">Databricks AI</a></div>
     <div class="nav-links">
-      <a href="index.html">Home</a>
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact Us</a>
     </div>
   </nav>
+
   <div class="content">
-    <h1>About Databricks AI</h1>
-    <p>At Databricks AI, we’re passionate about harnessing AI, mobile tech, and cloud innovation to solve real-world problems. Founded by a team of data and software enthusiasts, we empower businesses with scalable, intelligent solutions—because your success is our mission.</p>
+    <h1>About Us</h1>
+    <p>At Databricks AI, we’re a team of passionate engineers committed to pushing the boundaries of technology. With a focus on data-driven innovation, we specialize in delivering AI and ML solutions that empower businesses to thrive in a rapidly evolving digital landscape.</p>
+    <p>Our journey began with a simple idea: to build tools and teams that solve real-world problems. Today, we’ve grown into a network of over 5,000 consultants, operating hubs in Hyderabad, Bangalore, and Chennai, and serving clients across the US and India. Our engineers bring expertise from industry leaders like Google, Microsoft, and Amazon, ensuring top-tier solutions every time.</p>
+    <p>We believe in relationships over transactions. Our Contract-to-Hire model and referral-driven talent acquisition reflect our dedication to long-term partnerships, resulting in consultant tenures averaging over 3 years and client relationships lasting 2+ years.</p>
   </div>
+
   <footer>
     <p>© 2025 Databricks AI. All rights reserved.</p>
   </footer>
